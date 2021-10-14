@@ -6,7 +6,7 @@ class ConsultaFuncionarios:
     banco = pyodbc.connect('DSN=Contabil')
     cursor = banco.cursor()
 
-    lista_situacao = []
+    lista_situacao = [1]
 
     def cadastro_funcionario(self):
         self.cursor.execute(
