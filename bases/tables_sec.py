@@ -1,3 +1,5 @@
+# Funções de chamamento das tabelas secundárias para append nas demais
+
 import pyodbc
 import datetime
 
