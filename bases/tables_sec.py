@@ -26,7 +26,7 @@ class ConsultaPais:
 # Função para consulta da tabela fofilhos
     def consulta_filhos(self):
         self.cursor.execute(
-            "SELECT i_empregados, nome, data_nascto, CPF, i_filhos FROM externo.bethadba.fofilhos"
+            "SELECT codi_emp, i_empregados, nome, data_nascto, CPF, i_filhos FROM externo.bethadba.fofilhos"
         )
         info_filhos = self.cursor.fetchall()
         return info_filhos
@@ -48,4 +48,4 @@ class ConsultaPais:
         return info_operadora
 
 classe = ConsultaPais()
-print(classe.consulta_operadora())
+print(classe.consulta_filhos())

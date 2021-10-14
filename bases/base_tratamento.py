@@ -38,5 +38,3 @@ class Planilha:
 
 Planilha().tratamento_inicial()
 Planilha().escrevendo_planilha()
-
-
