@@ -1,7 +1,7 @@
 import pyodbc
 import datetime
 
-class ConsultaPais:
+class Consulta_Table_Sec:
     banco = pyodbc.connect('DSN=Contabil')
     cursor = banco.cursor()
 
@@ -47,5 +47,5 @@ class ConsultaPais:
         info_operadora = self.cursor.fetchall()
         return info_operadora
 
-classe = ConsultaPais()
+classe = Consulta_Table_Sec()
 print(classe.consulta_filhos())
