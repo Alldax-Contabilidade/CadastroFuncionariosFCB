@@ -1,4 +1,6 @@
 from banco_dados.consulta_funcionarios import ConsultaFuncionarios
+from bases.tables_sec import ConsultaPais
+
 import openpyxl
 
 class Planilha:

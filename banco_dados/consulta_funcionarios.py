@@ -1,7 +1,6 @@
 import pyodbc
 import datetime
 
-
 class ConsultaFuncionarios:
     banco = pyodbc.connect('DSN=Contabil')
     cursor = banco.cursor()
