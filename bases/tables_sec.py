@@ -47,5 +47,6 @@ class Consulta_Table_Sec:
         info_operadora = self.cursor.fetchall()
         return info_operadora
 
+# Teste de funcionalidade
 classe = Consulta_Table_Sec()
 print(classe.consulta_filhos())
