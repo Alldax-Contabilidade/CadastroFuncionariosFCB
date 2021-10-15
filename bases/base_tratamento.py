@@ -1,4 +1,6 @@
 from banco_dados.consulta_funcionarios import ConsultaFuncionarios
+from bases.tables_sec import Consulta_Table_Sec
+
 import openpyxl
 
 class Planilha:
@@ -36,5 +38,3 @@ class Planilha:
 
 Planilha().tratamento_inicial()
 Planilha().escrevendo_planilha()
-
-
