@@ -59,4 +59,4 @@ def lista_util():
         (0, "não"),
         (1, "sim")
     ]
-    return tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor,residencia,deficiencia
+    return tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia

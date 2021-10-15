@@ -14,12 +14,12 @@ class ConsultaFuncionarios:
 # O método execute permite a execução de uma query SQL
         self.cursor.execute(
             "SELECT i_empregados, nome, i_depto, i_servicos, i_cargos,i_sindicatos, TIPO_HORARIO, i_bancos,"
-            " I_OPERADORAPLANOSAUDE, MUNICIPIO_ENDERECO, PAIS_ENDERECO,PAIS_NASCIMENTO, PAIS_PASSAPORTE,"
+            " I_OPERADORAPLANOSAUDE, MUNICIPIO_ENDERECO, PAIS_ENDERECO, PAIS_NASCIMENTO, PAIS_PASSAPORTE,"
             " OPCAO_PLANO_SAUDE, MUNICIPIO_NASCIMENTO, TIPO_CONTA, cor, grau_instrucao,categoria, EMISSOR_PASSAPORTE,"
             "RESIDENCIA_PROPRIA,POSSUI_DEFICIENCIA, cpf, pis,admissao, venc_ferias,sindicalizado, salario,"
             " ini_praz_det, fim_praz_det, pro_praz_det, cart_prof,serie_cart_prof, dt_exp_cprof, uf_cart_prof,"
             " num_cart_ponto, horas_mes, horas_semana,horas_dia, forma_pagto,  conta_corr, PLANO_SAUDE_OPTANTES,"
-            " identidade, org_exp_ident, uf_exp_ident, dt_exp_ident, NUMERO_PASSAPORTE, ,UF_PASSAPORTE,"
+            " identidade, org_exp_ident, uf_exp_ident, dt_exp_ident, NUMERO_PASSAPORTE,UF_PASSAPORTE,"
             " DATA_EMISSAO_PASSAPORTE, DATA_VALIDADE_PASSAPORTE, titulo_eleit, zona_eleit, secao_eleit, cart_motorista,"
             " categ_cart_mot, ORGAO_EMISSOR_CNH, DATA_EXPEDICAO_CNH, estado, cart_reservista,cate_reservista,"
             " venc_cart_mot, ENDERECO_COMERCIAL, cep, endereco, numero_end, complemento, bairro, EMAIL_ALTERNATIVO,"
@@ -37,8 +37,7 @@ class ConsultaFuncionarios:
 # Nova busca da foempregados, retornando somente o i_empregados para comparação com a forescisoes
     def verificando_situacao_funcionario(self):
         self.cursor.execute(
-            "SELECT i_empregados FROM externo.bethadba.foempregados "
-            "WHERE codi_emp = 221"
+            "SELECT i_empregados FROM externo.bethadba.foempregados WHERE codi_emp = 221"
         )
         info_funcionarios = self.cursor.fetchall()
 
@@ -68,8 +67,7 @@ class ConsultaFuncionarios:
     # Função para consulta do nome dos departamentos
     def consulta_departamento(self):
         self.cursor.execute(
-            "SELECT i_depto, nome FROM externo.bethadba.fodepto "
-            "WHERE codi_emp = 221"
+            "SELECT i_depto, nome FROM externo.bethadba.fodepto WHERE codi_emp = 221"
         )
         info_departamentos = self.cursor.fetchall()
         return info_departamentos
@@ -85,7 +83,7 @@ class ConsultaFuncionarios:
 # Função para consulta do nome do Município na tabela efmunici
     def consulta_municipio(self):
         self.cursor.execute(
-            "SELECT codi_mun, nome_mun FROM externo.bethadba.efmunici"
+            "SELECT codigo_municipio, nome_municipio FROM externo.bethadba.gemunicipio"
         )
         info_municipio = self.cursor.fetchall()
         return info_municipio
@@ -93,7 +91,7 @@ class ConsultaFuncionarios:
 # Função para consulta da tabela fofilhos
     def consulta_filhos(self):
         self.cursor.execute(
-            "SELECT codi_emp, i_empregados, nome, data_nascto, CPF, i_filhos FROM externo.bethadba.fofilhos "
+            "SELECT i_empregados, nome, data_nascto, CPF, i_filhos FROM externo.bethadba.fofilhos "
             "WHERE codi_emp = 221"
         )
         info_filhos = self.cursor.fetchall()
@@ -102,8 +100,7 @@ class ConsultaFuncionarios:
 # Função para consulta de dados do plano de saúde na tabela foempregados_plano
     def consulta_plano(self):
         self.cursor.execute(
-            "SELECT CODI_EMP, DATA_INICIO FROM externo.bethadba.foempregados_plano_saude "
-            "WHERE codi_emp = 221"
+            "SELECT DATA_INICIO FROM externo.bethadba.foempregados_plano_saude WHERE codi_emp = 221"
         )
         info_plano = self.cursor.fetchall()
         return info_plano
@@ -111,7 +108,7 @@ class ConsultaFuncionarios:
 # Função para consulta de dados do plano de saúde na tabela fooperadoraplanosaude
     def consulta_operadora(self):
         self.cursor.execute(
-            "SELECT I_OPERADORAPLANOSAUDE, NOME FROM externo.bethadba.fooperadoraplanosaude "
+            "SELECT I_OPERADORAPLANOSAUDE, NOME FROM externo.bethadba.fooperadoraplanosaude"
 
         )
         info_operadora = self.cursor.fetchall()
@@ -120,8 +117,7 @@ class ConsultaFuncionarios:
 # Função para consulta do nome do cargo
     def consulta_cargos(self):
         self.cursor.execute(
-            "SELECT i_cargos, nome FROM externo.bethadba.focargos"
-            " WHERE codi_emp = 221"
+            "SELECT i_cargos, nome FROM externo.bethadba.focargos WHERE codi_emp = 221"
         )
         info_cargos = self.cursor.fetchall()
         return info_cargos
@@ -143,7 +139,7 @@ class ConsultaFuncionarios:
 # Função para consulta do nome do servico
     def consulta_servico(self):
         self.cursor.execute(
-            "SELECT codi_emp, i_servicos, nome FROM externo.bethadba.foservicos")
+            "SELECT i_servicos, nome FROM externo.bethadba.foservicos WHERE codi_emp = 221")
 
         info_servico = self.cursor.fetchall()
         return info_servico

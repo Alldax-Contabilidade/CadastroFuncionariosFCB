@@ -21,7 +21,6 @@ class Planilha:
 
     tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor,residencia,deficiencia = lista_util()
 
-
     wb = openpyxl.Workbook()
     ws = wb.active
     ordem_paramentro = [departamentos, servico, cargos, sindicato, tipo_horario,  banco, operadora, municipio, pais,
@@ -52,7 +51,8 @@ class Planilha:
             print(posicao)
             self.troca_nome(parametro, posicao)
             posicao += 1
-            break
+
+        print(self.lista_geral_cadastro[2073])
 
 # Criação de função para buscar nome baseado no cod
     def troca_nome(self, listagem_parametros, posicao):
@@ -62,10 +62,9 @@ class Planilha:
 
                 if cadastro[posicao] == listagem[0]:
                     cadastro[posicao] = listagem[1]
-                    break
-            print(cadastro)
 
-            break
+
+
 
     def escrevendo_planilha(self):
         self.ws['A1'] = "Codigo"
@@ -76,5 +75,6 @@ class Planilha:
             self.ws.append(row)
 
         self.wb.save("Funcionarios_FCB.xlsx")
+
 
 Planilha().trocar_id_nomes()
