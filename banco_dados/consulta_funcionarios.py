@@ -1,14 +1,17 @@
 import pyodbc
 import datetime
 
-
+# Classe para conexão com o B.D. assim como definição de funções para captura de outras tabelas
 class ConsultaFuncionarios:
     banco = pyodbc.connect('DSN=Contabil')
     cursor = banco.cursor()
 
-    lista_situacao = [1]
+    lista_situacao = []
 
+# Função para buscar dados específicos do cadastro de funcionários
     def cadastro_funcionario(self):
+
+# O método execute permite a execução de uma query SQL
         self.cursor.execute(
             "SELECT i_empregados, nome, i_depto, i_servicos, i_cargos,i_sindicatos, TIPO_HORARIO, i_bancos,"
             " I_OPERADORAPLANOSAUDE, MUNICIPIO_ENDERECO, PAIS_ENDERECO,PAIS_NASCIMENTO, PAIS_PASSAPORTE,"
@@ -28,10 +31,14 @@ class ConsultaFuncionarios:
             " POSSUI_DEFICIENCIA_MENTAL  FROM externo.bethadba.foempregados "
             "WHERE codi_emp = 221"
         )
+
+# O método fetchall armazena o valor recebido no último execute podendo ser armazendo em uma variável
         info_funcionarios = self.cursor.fetchall()
         # print(info_funcionarios)
         return info_funcionarios
 
+# Função para definir a situação dos funcionários como 'Demitido' ou 'Trabalhando'
+# Nova busca da foempregados, retornando somente o i_empregados para comparação com a forescisoes
     def verificando_situacao_funcionario(self):
         self.cursor.execute(
             "SELECT i_empregados FROM externo.bethadba.foempregados "
@@ -39,21 +46,30 @@ class ConsultaFuncionarios:
         )
         info_funcionarios = self.cursor.fetchall()
 
+# Captura dos i_empregados da forescisoes para comparação com a foempregados
         self.cursor.execute(
             "SELECT i_empregados FROM externo.bethadba.forescisoes WHERE codi_emp = 221"
         )
         info_rescisoes = self.cursor.fetchall()
 
+# Definição de um for...in que percorre a tabela foempregados e armazena em codigo
         for codigo in info_funcionarios:
 
+# Durante o loop se um dos valores de codigo estiver presente em forescisoes, o if inclui
+# o primeiro elemento de codigo na variável global lista_situacao através de um append
+# seguido de uma string com valor 'Demitido'
             if codigo in info_rescisoes:
                 self.lista_situacao.append((codigo[0], "Demitido"))
 
+# Faz o mesmo processo da linha anterior, mas inclui a string 'Trabalhando'
             else:
                 self.lista_situacao.append((codigo[0], "Trabalhando"))
 
+# Após a conclusão to if...else, todos os valores terão sido percorridos e estarão com a situação
+# preenchida. Com o consequente retorno da lista_situacao atualizada
         return self.lista_situacao
 
+    # Função para consulta do nome dos departamentos
     def consulta_departamento(self):
         self.cursor.execute(
             "SELECT i_depto, nome FROM externo.bethadba.fodepto "
@@ -132,6 +148,7 @@ class ConsultaFuncionarios:
     def consulta_servico(self):
         self.cursor.execute(
             "SELECT codi_emp, i_servicos, nome FROM externo.bethadba.foservicos")
+
         info_servico = self.cursor.fetchall()
         return info_servico
 
@@ -143,4 +160,3 @@ consulta = ConsultaFuncionarios()
 print(consulta.consulta_servico())
 #consulta.verificando_situacao_funcionario()
 #consulta.consulta_departamento()
-
