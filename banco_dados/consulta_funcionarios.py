@@ -1,6 +1,7 @@
 import pyodbc
 import datetime
 
+
 class ConsultaFuncionarios:
     banco = pyodbc.connect('DSN=Contabil')
     cursor = banco.cursor()
@@ -31,7 +32,7 @@ class ConsultaFuncionarios:
             "WHERE codi_emp = 221"
         )
         info_funcionarios = self.cursor.fetchall()
-        print(info_funcionarios)
+       # print(info_funcionarios)
         return info_funcionarios
 
     def verificando_situacao_funcionario(self):
@@ -64,10 +65,64 @@ class ConsultaFuncionarios:
         info_departamentos = self.cursor.fetchall()
         return info_departamentos
 
+# Função para consulta do nome do País na tabela gepais
+    def consulta_pais(self):
+        self.cursor.execute(
+            "SELECT codigo_pais, nome_pais FROM externo.bethadba.gepais"
+        )
+        info_pais = self.cursor.fetchall()
+        return info_pais
+
+# Função para consulta do nome do Município na tabela efmunici
+    def consulta_municipio(self):
+        self.cursor.execute(
+            "SELECT codi_mun, nome_mun FROM externo.bethadba.efmunici"
+        )
+        info_municipio = self.cursor.fetchall()
+        return info_municipio
+
+# Função para consulta da tabela fofilhos
+    def consulta_filhos(self):
+        self.cursor.execute(
+            "SELECT codi_emp, i_empregados, nome, data_nascto, CPF, i_filhos FROM externo.bethadba.fofilhos "
+            "WHERE codi_emp = 221"
+        )
+        info_filhos = self.cursor.fetchall()
+        return info_filhos
+
+# Função para consulta de dados do plano de saúde na tabela foempregados_plano
+    def consulta_plano(self):
+        self.cursor.execute(
+            "SELECT CODI_EMP, DATA_INICIO FROM externo.bethadba.foempregados_plano_saude "
+            "WHERE codi_emp = 221"
+        )
+        info_plano = self.cursor.fetchall()
+        return info_plano
+
+# Função para consulta de dados do plano de saúde na tabela fooperadoraplanosaude
+    def consulta_operadora(self):
+        self.cursor.execute(
+            "SELECT I_OPERADORAPLANOSAUDE, NOME FROM externo.bethadba.fooperadoraplanosaude "
+
+        )
+        info_operadora = self.cursor.fetchall()
+        return info_operadora
+
+# Função para consulta do nome do cargo
+    def consulta_cargos(self):
+        self.cursor.execute(
+            "SELECT i_cargos, nome FROM externo.bethadba.focargos"
+            " WHERE codi_emp = 221"
+        )
+        info_cargos = self.cursor.fetchall()
+        return info_cargos
 
 # nome, i_depto, i_servicos, i_cargos
 
-consulta = ConsultaFuncionarios()
-consulta.cadastro_funcionario()
+
+# Teste de funcionalidade da classe ConsultaFuncionarios()
+# consulta = ConsultaFuncionarios()
+# consulta.cadastro_funcionario()
 #consulta.verificando_situacao_funcionario()
 #consulta.consulta_departamento()
+
