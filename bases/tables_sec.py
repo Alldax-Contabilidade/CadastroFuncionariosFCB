@@ -50,13 +50,21 @@ class Consulta_Table_Sec:
         return info_operadora
 
 # Função para consulta do nome do departamento na tabela fodepto
-     def consulta_depto(self):
-            self.cursor.execute(
-                "SELECT i_depto, nome FROM externo.bethadba.fodepto"
-            )
-            info_depto = self.cursor.fetchall()
-            return info_depto
+    def consulta_depto(self):
+        self.cursor.execute(
+            "SELECT i_depto, nome FROM externo.bethadba.fodepto"
+        )
+        info_depto = self.cursor.fetchall()
+        return info_depto
+
+# Função para consulta do nome do cargo
+    def consulta_cargos(self):
+        self.cursor.execute(
+            "SELECT i_cargos, nome FROM externo.bethadba.focargos"
+        )
+        info_cargos = self.cursor.fetchall()
+        return info_cargos
 
 # Teste de funcionalidade
 classe = Consulta_Table_Sec()
-print(classe.consulta_filhos())
+print(classe.consulta_cargos())
