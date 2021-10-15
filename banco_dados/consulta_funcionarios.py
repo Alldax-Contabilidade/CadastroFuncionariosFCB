@@ -32,7 +32,7 @@ class ConsultaFuncionarios:
             "WHERE codi_emp = 221"
         )
         info_funcionarios = self.cursor.fetchall()
-       # print(info_funcionarios)
+        # print(info_funcionarios)
         return info_funcionarios
 
     def verificando_situacao_funcionario(self):
