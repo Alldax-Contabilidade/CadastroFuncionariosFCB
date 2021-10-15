@@ -10,7 +10,7 @@ class ConsultaFuncionarios:
     def cadastro_funcionario(self):
         self.cursor.execute(
             "SELECT i_empregados, nome, i_depto, i_servicos, i_cargos, cpf, pis, i_sindicatos, admissao, venc_ferias,"
-            " vinculo, categoria, sindicalizado, salario, ini_praz_det, fim_praz_det, pro_praz_det, cart_prof"
+            " vinculo, categoria, sindicalizado, salario, ini_praz_det, fim_praz_det, pro_praz_det, cart_prof,"
             "serie_cart_prof, dt_exp_cprof, uf_cart_prof, TIPO_HORARIO, num_cart_ponto, horas_mes, horas_semana,"
             "horas_dia, forma_pagto, i_bancos, conta_corr, TIPO_CONTA, I_OPERADORAPLANOSAUDE, PLANO_SAUDE_OPTANTES, "
             "OPCAO_PLANO_SAUDE "
@@ -24,7 +24,10 @@ class ConsultaFuncionarios:
             "EMAIL_ALTERNATIVO, EMAIL, fone, fone2, data_nascimento,uf_nascimento, PAIS_NACIONALIDADE,"
             " MUNICIPIO_NASCIMENTO,"
             "PAIS_NASCIMENTO, naturalizado, DATA_NATURALIZACAO, ALVARA_JUDICIAL, NUMERO_ALVARA, nome_mae, nome_pai,"
-            "nome_conjuge, sexo,  FROM externo.bethadba.foempregados "
+            "nome_conjuge, sexo, estado_civil, cor, grupo_sanguineo, rh_sanguineo, grau_instrucao, CASADO_BRASILEIRO,"
+            "POSSUI_DEFICIENCIA, POSSUI_DEFICIENCIA_MOTORA, deficiente_fisico, POSSUI_DEFICIENCIA_VISUAL,"
+            "POSSUI_DEFICIENCIA_AUDITIVA, POSSUI_DEFICIENCIA_OUTRAS, POSSUI_DEFICIENCIA_REABILITADO, "
+            "OBSERVACAO_DEFICIENCIA, POSSUI_DEFICIENCIA_MENTAL  FROM externo.bethadba.foempregados "
             "WHERE codi_emp = 221"
         )
         info_funcionarios = self.cursor.fetchall()
