@@ -1,5 +1,6 @@
 from banco_dados.consulta_funcionarios import ConsultaFuncionarios
 import openpyxl
+from lista_util.listas_sem_tabelas import lista_util
 
 
 class Planilha:
@@ -18,9 +19,14 @@ class Planilha:
     pais = consulta.consulta_pais()
     planos = consulta.consulta_plano()
 
+    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor,residencia,deficiencia = lista_util()
+
+
     wb = openpyxl.Workbook()
     ws = wb.active
-    ordem_paramentro = [departamentos, servico, cargos, sindicato,  banco, operadora, municipio, pais, pais, planos]
+    ordem_paramentro = [departamentos, servico, cargos, sindicato, tipo_horario,  banco, operadora, municipio, pais,
+                        pais, pais, planos, municipio, tipo_conta, cor_raca, grau_instrucao, categoria, emissor,
+                        residencia,deficiencia]
     lista_cadastro = []
     lista_geral_cadastro = []
 
