@@ -152,11 +152,18 @@ class ConsultaFuncionarios:
         info_servico = self.cursor.fetchall()
         return info_servico
 
-# nome, i_depto, i_servicos, i_cargos
+"""
+Testes de funcionalidade
 
-
-# Teste de funcionalidade da classe ConsultaFuncionarios()
 consulta = ConsultaFuncionarios()
 print(consulta.consulta_servico())
-#consulta.verificando_situacao_funcionario()
-#consulta.consulta_departamento()
+
+consulta.verificando_situacao_funcionario()
+consulta.consulta_departamento()
+
+consulta = ConsultaFuncionarios()
+print(consulta.lista_situacao)
+consulta.verificando_situacao_funcionario()
+print(consulta.lista_situacao)
+"""
+
