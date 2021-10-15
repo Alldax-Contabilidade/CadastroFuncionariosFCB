@@ -7,17 +7,20 @@ class Planilha:
     consulta = ConsultaFuncionarios()
     cadastro_funcionario = consulta.cadastro_funcionario()
     situacao = consulta.verificando_situacao_funcionario()
-    departamentos = consulta.consulta_departamento()
-    pais = consulta.consulta_pais()
-    municipio = consulta.consulta_municipio()
     filhos = consulta.consulta_filhos()
-    planos = consulta.consulta_plano()
-    operadora = consulta.consulta_operadora()
+    departamentos = consulta.consulta_departamento()
+    servico = consulta.consulta_servico()
     cargos = consulta.consulta_cargos()
+    sindicato = consulta.consulta_sindicato()
+    banco = consulta.consulta_banco()
+    operadora = consulta.consulta_operadora()
+    municipio = consulta.consulta_municipio()
+    pais = consulta.consulta_pais()
+    planos = consulta.consulta_plano()
 
     wb = openpyxl.Workbook()
     ws = wb.active
-    ordem_paramentro = [departamentos, cargos]
+    ordem_paramentro = [departamentos, servico, cargos, sindicato,  banco, operadora, municipio, pais, pais, planos]
     lista_cadastro = []
     lista_geral_cadastro = []
 
