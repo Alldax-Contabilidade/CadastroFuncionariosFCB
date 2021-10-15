@@ -117,12 +117,33 @@ class ConsultaFuncionarios:
         info_cargos = self.cursor.fetchall()
         return info_cargos
 
+# Função para consulta do nome do sindicato
+    def consulta_sindicato(self):
+        self.cursor.execute(
+            "SELECT i_sindicatos, nome FROM externo.bethadba.fosindicatos")
+        info_sindicato = self.cursor.fetchall()
+        return info_sindicato
+
+# Função para consulta do nome do banco
+    def consulta_banco(self):
+        self.cursor.execute(
+            "SELECT i_bancos, nome FROM externo.bethadba.fobancos")
+        info_banco = self.cursor.fetchall()
+        return info_banco
+
+# Função para consulta do nome do servico
+    def consulta_servico(self):
+        self.cursor.execute(
+            "SELECT codi_emp, i_servicos, nome FROM externo.bethadba.foservicos")
+        info_servico = self.cursor.fetchall()
+        return info_servico
+
 # nome, i_depto, i_servicos, i_cargos
 
 
 # Teste de funcionalidade da classe ConsultaFuncionarios()
-# consulta = ConsultaFuncionarios()
-# consulta.cadastro_funcionario()
+consulta = ConsultaFuncionarios()
+print(consulta.consulta_servico())
 #consulta.verificando_situacao_funcionario()
 #consulta.consulta_departamento()
 
