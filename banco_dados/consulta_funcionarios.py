@@ -11,20 +11,20 @@ class ConsultaFuncionarios:
 # Função para buscar dados específicos do cadastro de funcionários
     def cadastro_funcionario(self):
 
-# O método execute permite a execução de uma query SQL
+        # O método execute permite a execução de uma query SQL
         self.cursor.execute(
             "SELECT i_empregados, nome, i_depto, i_servicos, i_cargos,i_sindicatos, TIPO_HORARIO, i_bancos,"
-            " I_OPERADORAPLANOSAUDE, MUNICIPIO_ENDERECO, PAIS_ENDERECO, PAIS_NASCIMENTO, PAIS_PASSAPORTE,"
-            " OPCAO_PLANO_SAUDE, MUNICIPIO_NASCIMENTO, TIPO_CONTA, cor, grau_instrucao,categoria, EMISSOR_PASSAPORTE,"
-            "RESIDENCIA_PROPRIA,POSSUI_DEFICIENCIA, cpf, pis,admissao, venc_ferias,sindicalizado, salario,"
+            " MUNICIPIO_ENDERECO, PAIS_ENDERECO, PAIS_NASCIMENTO, PAIS_PASSAPORTE,"
+            " MUNICIPIO_NASCIMENTO, TIPO_CONTA, cor, grau_instrucao,categoria, EMISSOR_PASSAPORTE, RESIDENCIA_PROPRIA,"
+            "POSSUI_DEFICIENCIA,sindicalizado, OPCAO_PLANO_SAUDE,  cpf, pis,admissao, venc_ferias, salario,"
             " ini_praz_det, fim_praz_det, pro_praz_det, cart_prof,serie_cart_prof, dt_exp_cprof, uf_cart_prof,"
-            " num_cart_ponto, horas_mes, horas_semana,horas_dia, forma_pagto,  conta_corr, PLANO_SAUDE_OPTANTES,"
+            " num_cart_ponto, horas_mes, horas_semana,horas_dia, forma_pagto,  conta_corr,"
             " identidade, org_exp_ident, uf_exp_ident, dt_exp_ident, NUMERO_PASSAPORTE,UF_PASSAPORTE,"
             " DATA_EMISSAO_PASSAPORTE, DATA_VALIDADE_PASSAPORTE, titulo_eleit, zona_eleit, secao_eleit, cart_motorista,"
             " categ_cart_mot, ORGAO_EMISSOR_CNH, DATA_EXPEDICAO_CNH, estado, cart_reservista,cate_reservista,"
-            " venc_cart_mot, ENDERECO_COMERCIAL, cep, endereco, numero_end, complemento, bairro, EMAIL_ALTERNATIVO,"
+            " venc_cart_mot, cep, endereco, numero_end, complemento, bairro, EMAIL_ALTERNATIVO,"
             " EMAIL, fone, fone2, data_nascimento,uf_nascimento,naturalizado, DATA_NATURALIZACAO, nome_mae, nome_pai,"
-            " nome_conjuge, sexo, estado_civil, grupo_sanguineo, rh_sanguineo,  CASADO_BRASILEIRO"
+            " nome_conjuge, sexo, estado_civil, grupo_sanguineo, rh_sanguineo"
             " FROM externo.bethadba.foempregados WHERE codi_emp = 221"
         )
 
@@ -100,7 +100,8 @@ class ConsultaFuncionarios:
 # Função para consulta de dados do plano de saúde na tabela foempregados_plano
     def consulta_plano(self):
         self.cursor.execute(
-            "SELECT DATA_INICIO FROM externo.bethadba.foempregados_plano_saude WHERE codi_emp = 221"
+            "SELECT I_EMPREGADOS, I_OPERADORAPLANOSAUDE, DATA_INICIO FROM externo.bethadba.foempregados_plano_saude "
+            "WHERE codi_emp = 221"
         )
         info_plano = self.cursor.fetchall()
         return info_plano
@@ -143,6 +144,25 @@ class ConsultaFuncionarios:
 
         info_servico = self.cursor.fetchall()
         return info_servico
+
+    def consulta_toxicologico(self, cod_empregado):
+        self.cursor.execute(
+            f"SELECT TOP 1 DATA, TIPO FROM externo.bethadba.FOEMPREGADOS_EXAMES_TOXICOLOGICOS  "
+            f"WHERE codi_emp = 221 AND I_EMPREGADOS = {cod_empregado} ORDER BY DATA desc"
+        )
+        info_toxicologico = self.cursor.fetchall()
+
+        return info_toxicologico
+
+    def consulta_ocupacional(self):
+        self.cursor.execute(
+            "SELECT I_EMPREGADOS, I_ATESTADO_OCUPACIONAL, DATA, RESULTADO ,DATA_VENCIMENTO "
+            "FROM externo.bethadba.FOEMPREGADOS_ATESTADOS_OCUPACIONAIS  WHERE codi_emp = 221"
+        )
+        info_ocupacional = self.cursor.fetchall()
+        return info_ocupacional
+
+
 
 """
 Testes de funcionalidade

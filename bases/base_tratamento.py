@@ -1,10 +1,10 @@
 from banco_dados.consulta_funcionarios import ConsultaFuncionarios
 import openpyxl
 from lista_util.listas_sem_tabelas import lista_util
+import datetime
 
 
 class Planilha:
-
     consulta = ConsultaFuncionarios()
     cadastro_funcionario = consulta.cadastro_funcionario()
     situacao = consulta.verificando_situacao_funcionario()
@@ -18,14 +18,17 @@ class Planilha:
     municipio = consulta.consulta_municipio()
     pais = consulta.consulta_pais()
     planos = consulta.consulta_plano()
+    # toxicologico = consulta.consulta_toxicologico()
+    #ocupacional= consulta.consulta_ocupacional()
 
-    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor,residencia,deficiencia = lista_util()
+    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, \
+    sindicalizado, ocupacional = lista_util()
 
     wb = openpyxl.Workbook()
     ws = wb.active
-    ordem_paramentro = [departamentos, servico, cargos, sindicato, tipo_horario,  banco, operadora, municipio, pais,
-                        pais, pais, planos, municipio, tipo_conta, cor_raca, grau_instrucao, categoria, emissor,
-                        residencia,deficiencia]
+    ordem_paramentro = [departamentos, servico, cargos, sindicato, tipo_horario, banco, municipio, pais,
+                        pais, pais, municipio, tipo_conta, cor_raca, grau_instrucao, categoria, emissor,
+                        residencia, deficiencia, sindicalizado]
     lista_cadastro = []
     lista_geral_cadastro = []
 
@@ -40,6 +43,7 @@ class Planilha:
                     self.lista_teste.append((codi_func, nome_func, situacao[1]))
                     break
 
+
     def trocar_id_nomes(self):
         for cadastro in self.cadastro_funcionario:
             lista_cadastro = list(cadastro)
@@ -48,13 +52,13 @@ class Planilha:
 
         posicao = 2
         for parametro in self.ordem_paramentro:
-            print(posicao)
+            # print(posicao)
             self.troca_nome(parametro, posicao)
             posicao += 1
 
-        print(self.lista_geral_cadastro[2073])
+        # print(self.lista_geral_cadastro[2073])
 
-# Criação de função para buscar nome baseado no cod
+    # Criação de função para buscar nome baseado no cod
     def troca_nome(self, listagem_parametros, posicao):
         for cadastro in self.lista_geral_cadastro:
 
@@ -62,6 +66,69 @@ class Planilha:
 
                 if cadastro[posicao] == listagem[0]:
                     cadastro[posicao] = listagem[1]
+
+    def plano_saude(self):
+
+        for funcionario in self.lista_geral_cadastro:
+            cod_funcionario = funcionario[0]
+            plano_saude = funcionario[21]
+
+            if plano_saude == 1:
+                for plano_funcionario in self.planos:
+                    cod_emp = plano_funcionario[0]
+                    cod_operadora = plano_funcionario[1]
+                    data_inicio = plano_funcionario[2]
+
+                    if cod_funcionario == cod_emp:
+                        for operadora in self.operadora:
+                            id_operadora = operadora[0]
+                            nome_operadora = operadora[1]
+
+                            if cod_operadora == id_operadora:
+                                #print(f"{cod_funcionario} | {nome_operadora} | {data_inicio}")
+                                funcionario[21] = nome_operadora
+                                funcionario.insert(22, data_inicio)
+
+            else:
+                funcionario[21] = ''
+                funcionario.insert(22, '')
+
+    def exame_toxicologico(self):
+        for cadastro in self.lista_geral_cadastro:
+            codi_func = cadastro[0]
+
+            toxicologico = self.consulta.consulta_toxicologico(codi_func)
+
+            if len(toxicologico) == 0:
+                cadastro.append('')
+                cadastro.append('')
+
+            else:
+                if toxicologico[0][1] == 1:
+                    cadastro.append(toxicologico[0][0])
+                    cadastro.append('Admissional')
+                else:
+                    cadastro.append(toxicologico[0][0])
+                    cadastro.append('Demissional')
+
+
+        print(self.lista_geral_cadastro[2218])
+        print(self.lista_geral_cadastro[0])
+
+    def exame_ocupacional(self):
+        for cadastro in self.lista_geral_cadastro:
+            codi_func = cadastro[0]
+
+            ocupacional = self.consulta.consulta_ocupacional(codi_func)
+
+            if len(ocupacional) == 0:
+                cadastro.append('')
+                cadastro.append('')
+                cadastro.append('')
+                cadastro.append('')
+            else: cadastro.append(ocupacional[1])
+
+
 
 
 
@@ -76,5 +143,7 @@ class Planilha:
 
         self.wb.save("Funcionarios_FCB.xlsx")
 
-
 Planilha().trocar_id_nomes()
+Planilha().plano_saude()
+Planilha().exame_toxicologico()
+Planilha().exame_ocupacional()

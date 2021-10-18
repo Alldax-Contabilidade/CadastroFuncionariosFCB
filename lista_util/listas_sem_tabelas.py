@@ -59,4 +59,21 @@ def lista_util():
         (0, "não"),
         (1, "sim")
     ]
-    return tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia
+    plano_de_saude = [
+        (0, "não"),
+        (1, "sim")
+    ]
+    sindicalizado = [
+        (0, "não"),
+        (1, "sim")
+    ]
+    ocupacional = [
+        (1, "admissional"),
+        (2, "periodico"),
+        (3, "retorno ao trabalho"),
+        (4, "manuntenção de função"),
+        (5, "monitoração pontual"),
+        (6, "demissional")
+    ]
+    return tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, \
+           sindicalizado, ocupacional
