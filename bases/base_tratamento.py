@@ -1,8 +1,8 @@
 from banco_dados.consulta_funcionarios import ConsultaFuncionarios
 import openpyxl
+from openpyxl.styles import PatternFill
 from lista_util.listas_sem_tabelas import lista_util, dicionario_ocupacional, cabecalho
-from datetime import datetime
-
+from openpyxl.styles import Font
 
 
 class Planilha:
@@ -18,15 +18,16 @@ class Planilha:
     operadora = consulta.consulta_operadora()
     municipio = consulta.consulta_municipio()
     pais = consulta.consulta_pais()
-    # planos = consulta.consulta_plano()
-    # toxicologico = consulta.consulta_toxicologico()
-    #ocupacional= consulta.consulta_ocupacional()
 
-    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, \
-    sindicalizado = lista_util()
+    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, \
+    deficiencia, sindicalizado = lista_util()
 
     wb = openpyxl.Workbook()
     ws = wb.active
+
+    negrito = Font(bold=True)
+    fundo_cor = PatternFill(start_color="0099CCFF", end_color="0099CCFF", fill_type="solid")
+
     ordem_paramentro = [departamentos, servico, cargos, sindicato, tipo_horario, banco, municipio, pais,
                         pais, pais, municipio, tipo_conta, cor_raca, grau_instrucao, categoria, emissor,
                         residencia, deficiencia, sindicalizado]
@@ -75,21 +76,6 @@ class Planilha:
                         funcionario[21] = nome_operadora
                         funcionario.insert(22, info_plano[0][1])
 
-                # for plano_funcionario in self.planos:
-                #     cod_emp = plano_funcionario[0]
-                #     cod_operadora = plano_funcionario[1]
-                #     data_inicio = plano_funcionario[2]
-                #
-                #     if cod_funcionario == cod_emp:
-                #         for operadora in self.operadora:
-                #             id_operadora = operadora[0]
-                #             nome_operadora = operadora[1]
-                #
-                #             if cod_operadora == id_operadora:
-                #                 #print(f"{cod_funcionario} | {nome_operadora} | {data_inicio}")
-                #                 funcionario[21] = nome_operadora
-                #                 funcionario.insert(22, data_inicio)
-
             else:
                 funcionario[21] = ''
                 funcionario.insert(22, '')
@@ -113,10 +99,10 @@ class Planilha:
                     cadastro.append(toxicologico[0][0])
                     cadastro.append('Demissional')
 
-
         # print(self.lista_geral_cadastro[2218])
         # print(self.lista_geral_cadastro[0])
-#criação de função para conectar planilhas e modificar números por nomes
+
+    # criação de função para conectar planilhas e modificar números por nomes
     def exame_ocupacional(self):
         for cadastro in self.lista_geral_cadastro:
             codi_func = cadastro[0]
@@ -131,13 +117,14 @@ class Planilha:
             else:
                 dicionario, resultado = dicionario_ocupacional()
                 tipo = dicionario[ocupacional[0][0]]
-                result= resultado[ocupacional[0][2]]
+                result = resultado[ocupacional[0][2]]
                 cadastro.append(tipo)
                 cadastro.append(ocupacional[0][1])
                 cadastro.append(result)
                 cadastro.append(ocupacional[0][3])
         # print(self.lista_geral_cadastro[362])
-# criação de função para definir situação de atividade
+
+    # criação de função para definir situação de atividade
 
     def situacao_funcionario(self):
         for cadastro in self.lista_geral_cadastro:
@@ -152,7 +139,7 @@ class Planilha:
         for cadastro in self.lista_geral_cadastro:
 
             if cadastro[29] is None or cadastro[30] is None:
-                pass
+                cadastro.insert(31, '')
 
             else:
 
@@ -165,7 +152,10 @@ class Planilha:
         titulos_cabecalho = cabecalho()
 
         for coluna in range(1, len(titulos_cabecalho) + 1):
-            self.ws.cell(row=1, column=coluna).value = titulos_cabecalho[coluna-1]
+            self.ws.cell(row=1, column=coluna).font = self.negrito
+            self.ws.cell(row=1, column=coluna).fill = self.fundo_cor
+
+            self.ws.cell(row=1, column=coluna).value = titulos_cabecalho[coluna - 1]
 
         for cadastro in self.lista_geral_cadastro:
             cadastro_tupla = tuple(cadastro)
@@ -176,12 +166,3 @@ class Planilha:
             self.ws.append(linha)
 
         self.wb.save("Funcionarios_FCB.xlsx")
-
-
-Planilha().trocar_id_nomes()
-Planilha().plano_saude()
-Planilha().exame_toxicologico()
-Planilha().exame_ocupacional()
-Planilha().situacao_funcionario()
-Planilha().dias_exp()
-Planilha().escrevendo_planilha()
