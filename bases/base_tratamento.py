@@ -1,6 +1,6 @@
 from banco_dados.consulta_funcionarios import ConsultaFuncionarios
 import openpyxl
-from lista_util.listas_sem_tabelas import lista_util
+from lista_util.listas_sem_tabelas import lista_util, dicionario_ocupacional
 import datetime
 
 
@@ -22,7 +22,7 @@ class Planilha:
     #ocupacional= consulta.consulta_ocupacional()
 
     tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, \
-    sindicalizado, ocupacional = lista_util()
+    sindicalizado = lista_util()
 
     wb = openpyxl.Workbook()
     ws = wb.active
@@ -31,18 +31,6 @@ class Planilha:
                         residencia, deficiencia, sindicalizado]
     lista_cadastro = []
     lista_geral_cadastro = []
-
-    def tratamento_inicial(self):
-        for cadastro in self.cadastro_funcionario:
-            codi_func = cadastro[0]
-            nome_func = cadastro[1]
-
-            for situacao in self.situacao:
-
-                if codi_func == situacao[0]:
-                    self.lista_teste.append((codi_func, nome_func, situacao[1]))
-                    break
-
 
     def trocar_id_nomes(self):
         for cadastro in self.cadastro_funcionario:
@@ -112,8 +100,8 @@ class Planilha:
                     cadastro.append('Demissional')
 
 
-        print(self.lista_geral_cadastro[2218])
-        print(self.lista_geral_cadastro[0])
+        # print(self.lista_geral_cadastro[2218])
+        # print(self.lista_geral_cadastro[0])
 
     def exame_ocupacional(self):
         for cadastro in self.lista_geral_cadastro:
@@ -126,11 +114,24 @@ class Planilha:
                 cadastro.append('')
                 cadastro.append('')
                 cadastro.append('')
-            else: cadastro.append(ocupacional[1])
+            else:
+                dicionario, resultado = dicionario_ocupacional()
+                tipo = dicionario[ocupacional[0][0]]
+                result= resultado[ocupacional[0][2]]
+                cadastro.append(tipo)
+                cadastro.append(ocupacional[0][1])
+                cadastro.append(result)
+                cadastro.append(ocupacional[0][3])
+        # print(self.lista_geral_cadastro[362])
 
-
-
-
+    def situacao_funcionario(self):
+        for cadastro in self.lista_geral_cadastro:
+            codi_funcionario = cadastro[0]
+            for situacao in self.situacao:
+                if codi_funcionario == situacao[0]:
+                    cadastro.insert(2, situacao[1])
+                    break
+        print(self.lista_geral_cadastro[2078])
 
 
     def escrevendo_planilha(self):
@@ -147,3 +148,4 @@ Planilha().trocar_id_nomes()
 Planilha().plano_saude()
 Planilha().exame_toxicologico()
 Planilha().exame_ocupacional()
+Planilha().situacao_funcionario()

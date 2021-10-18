@@ -154,18 +154,18 @@ class ConsultaFuncionarios:
 
         return info_toxicologico
 
-    def consulta_ocupacional(self):
+    def consulta_ocupacional(self, cod_empregado):
         self.cursor.execute(
-            "SELECT I_EMPREGADOS, I_ATESTADO_OCUPACIONAL, DATA, RESULTADO ,DATA_VENCIMENTO "
-            "FROM externo.bethadba.FOEMPREGADOS_ATESTADOS_OCUPACIONAIS  WHERE codi_emp = 221"
+            f"SELECT TOP 1 I_ATESTADO_OCUPACIONAL, DATA, RESULTADO ,DATA_VENCIMENTO "
+            f"FROM externo.bethadba.FOEMPREGADOS_ATESTADOS_OCUPACIONAIS  WHERE codi_emp = 221"
+            f"AND I_EMPREGADOS = {cod_empregado} ORDER BY DATA desc"
         )
         info_ocupacional = self.cursor.fetchall()
         return info_ocupacional
 
 
 
-"""
-Testes de funcionalidade
+"""Testes de funcionalidade
 
 consulta = ConsultaFuncionarios()
 print(consulta.consulta_servico())
