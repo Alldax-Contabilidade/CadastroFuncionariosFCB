@@ -86,3 +86,27 @@ def dicionario_ocupacional():
         2: "inapto"
     }
     return ocupacional, resultado
+
+def cabecalho():
+    cabecalho_excel = ["Código Funcionario", "Nome Funcionário", "Situação", "Departamento", "Serviço", "Cargo",
+                       "Sindicato", "Horário", "Banco", "Município do Endereço", "País do Endereço",
+                       "País do Nascimento", "País do Passaporte", "Município do Nascimento",
+                       "Tipo de Conta", "Cor", "Grau de Instrução", "Categoria", "Emissor do Passaporte",
+                       "Residente Própria", "Deficiência", "Sindicalizado", "Operadora do Plano de Saúde",
+                       "Data de adesão", "CPF", "PIS", "Data de Admissão", "Vencimento Férias",
+                       "Salário", "Início da Experiência", "Final da Experiência", "Dias de Experiência",
+                       "Prorrogação da Experiência", "CTPS", "Nº Série CTPS", "Expedição CTPS",
+                       "UF CTPS", "Nº Cartão Ponto", "Horas Mês", "Horas Semana", "Horas Dias",
+                       "Forma de Pagamento", "Conta", "R.G.", "Orgão Exp. R.G.", "UF R.G.",
+                       "Data Exp. R.G.", "Nº Passaporte", "UF Passaporte", "Emissão Passaporte",
+                       "Validade Passaporte", "Nº Título Eleitor", "Zona Eleitoral",
+                       "Seção Eleitoral", "CNH", "Cat. CNH", "Orgão Emissor CNH", "Dt. Exp. CNH",
+                       "Estado", "Reservista", "Categoria Reservista", "Vencimento CNH", "CEP",
+                       "Endereço", "Nº Endereço", "Complemento Endereço", "Bairro", "E-mail alternativo",
+                       "E-mail", "Fone", "Fone 2", "Nascimento", "UF Nascimento", "Naturalizado",
+                       "Data Naturalização", "Mãe", "Pai", "Conjugê", "Sexo", "Estado Civil",
+                       "Grupo Sanguíneo", "RH Sanguíneo", "Toxicológico Data", "Toxocológico Tipo",
+                       "Ex. Ocupacional Tipo", "Ex. Ocupacional Data", "Ex. Ocupacional Resultado",
+                       "Ex. Ocupacional Dt. Vencimento"]
+
+    return cabecalho_excel

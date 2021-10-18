@@ -33,6 +33,7 @@ class ConsultaFuncionarios:
         # print(info_funcionarios)
         return info_funcionarios
 
+
 # Função para definir a situação dos funcionários como 'Demitido' ou 'Trabalhando'
 # Nova busca da foempregados, retornando somente o i_empregados para comparação com a forescisoes
     def verificando_situacao_funcionario(self):
@@ -98,10 +99,10 @@ class ConsultaFuncionarios:
         return info_filhos
 
 # Função para consulta de dados do plano de saúde na tabela foempregados_plano
-    def consulta_plano(self):
+    def consulta_plano(self, codigo_funcionario):
         self.cursor.execute(
-            "SELECT I_EMPREGADOS, I_OPERADORAPLANOSAUDE, DATA_INICIO FROM externo.bethadba.foempregados_plano_saude "
-            "WHERE codi_emp = 221"
+            f"SELECT TOP 1 I_OPERADORAPLANOSAUDE, DATA_INICIO FROM externo.bethadba.foempregados_plano_saude "
+            f"WHERE codi_emp = 221 AND I_EMPREGADOS = {codigo_funcionario} ORDER BY DATA_INICIO desc"
         )
         info_plano = self.cursor.fetchall()
         return info_plano
