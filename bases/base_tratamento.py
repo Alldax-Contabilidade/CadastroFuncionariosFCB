@@ -32,6 +32,7 @@ class Planilha:
     lista_cadastro = []
     lista_geral_cadastro = []
 
+    # criação de função para conectar planilhas e modificar números por nomes
     def trocar_id_nomes(self):
         for cadastro in self.cadastro_funcionario:
             lista_cadastro = list(cadastro)
@@ -55,6 +56,7 @@ class Planilha:
                 if cadastro[posicao] == listagem[0]:
                     cadastro[posicao] = listagem[1]
 
+    # criação de função para conectar planilhas e modificar números por nomes
     def plano_saude(self):
 
         for funcionario in self.lista_geral_cadastro:
@@ -81,6 +83,7 @@ class Planilha:
                 funcionario[21] = ''
                 funcionario.insert(22, '')
 
+    # criação de função para conectar planilhas e modificar números por nomes
     def exame_toxicologico(self):
         for cadastro in self.lista_geral_cadastro:
             codi_func = cadastro[0]
@@ -102,7 +105,7 @@ class Planilha:
 
         # print(self.lista_geral_cadastro[2218])
         # print(self.lista_geral_cadastro[0])
-
+#criação de função para conectar planilhas e modificar números por nomes
     def exame_ocupacional(self):
         for cadastro in self.lista_geral_cadastro:
             codi_func = cadastro[0]
@@ -123,7 +126,7 @@ class Planilha:
                 cadastro.append(result)
                 cadastro.append(ocupacional[0][3])
         # print(self.lista_geral_cadastro[362])
-
+# criação de função para definir situação de atividade
     def situacao_funcionario(self):
         for cadastro in self.lista_geral_cadastro:
             codi_funcionario = cadastro[0]
