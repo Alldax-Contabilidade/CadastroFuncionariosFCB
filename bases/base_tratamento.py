@@ -3,6 +3,7 @@ import openpyxl
 from openpyxl.styles import PatternFill
 from lista_util.listas_sem_tabelas import lista_util, dicionario_ocupacional, cabecalho
 from openpyxl.styles import Font
+import getpass
 
 
 class Planilha:
@@ -33,6 +34,8 @@ class Planilha:
                         residencia, deficiencia, sindicalizado]
     lista_cadastro = []
     lista_geral_cadastro = []
+
+    user = getpass.getuser()
 
     # criação de função para conectar planilhas e modificar números por nomes
     def trocar_id_nomes(self):
@@ -165,4 +168,4 @@ class Planilha:
         for linha in self.lista_cadastro:
             self.ws.append(linha)
 
-        self.wb.save("Funcionarios_FCB.xlsx")
+        self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
