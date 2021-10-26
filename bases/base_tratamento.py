@@ -216,5 +216,50 @@ class Planilha:
         self.ws.move_range(f"AC1:AC{self.ws.max_row}", cols=-16)
         self.ws.delete_cols(29, 1)
 
+        # Move dados da Experiência
+        self.ws.insert_cols(14)
+        self.ws.insert_cols(14)
+        self.ws.insert_cols(14)
+        self.ws.insert_cols(14)
+
+        self.ws.move_range(f"AG1:AG{self.ws.max_row}", cols=-19)
+        self.ws.move_range(f"AH1:AH{self.ws.max_row}", cols=-19)
+        self.ws.move_range(f"AI1:AI{self.ws.max_row}", cols=-19)
+        self.ws.move_range(f"AJ1:AJ{self.ws.max_row}", cols=-19)
+
+        self.ws.delete_cols(33, 4)
+
+        # Move dados da CTPS
+        self.ws.insert_cols(18)
+        self.ws.insert_cols(18)
+        self.ws.insert_cols(18)
+        self.ws.insert_cols(18)
+
+        self.ws.move_range(f"AK1:AK{self.ws.max_row}", cols=-19)
+        self.ws.move_range(f"AL1:AL{self.ws.max_row}", cols=-19)
+        self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=-19)
+        self.ws.move_range(f"AN1:AN{self.ws.max_row}", cols=-19)
+
+        self.ws.delete_cols(37, 4)
+
+        # Move dados do Horário
+        self.ws.insert_cols(23)
+        self.ws.insert_cols(23)
+        self.ws.insert_cols(23)
+
+        self.ws.move_range(f"AO1:AO{self.ws.max_row}", cols=-18)
+        self.ws.move_range(f"AP1:AP{self.ws.max_row}", cols=-18)
+        self.ws.move_range(f"AQ1:AQ{self.ws.max_row}", cols=-18)
+
+        self.ws.delete_cols(41, 3)
+
+        # Move dados do Banco
+        self.ws.insert_cols(26, 3)
+
+        self.ws.move_range(f"AS1:AS{self.ws.max_row}", cols=-19)
+        self.ws.move_range(f"AR1:AR{self.ws.max_row}", cols=-17)
+        self.ws.move_range(f"AT1:AT{self.ws.max_row}", cols=-17)
+
+        self.ws.delete_cols(44, 3)
 
         self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
