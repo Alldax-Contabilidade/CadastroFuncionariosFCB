@@ -168,4 +168,53 @@ class Planilha:
         for linha in self.lista_cadastro:
             self.ws.append(linha)
 
+        # self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
+
+    def ordenando_colunas(self):
+        # Move o banco
+        self.ws.insert_cols(42)
+        self.ws.move_range(f"I1:I{self.ws.max_row}", cols=33)
+        self.ws.delete_cols(9, 1)
+
+        # Move o CPF
+        self.ws.insert_cols(4)
+        self.ws.move_range(f"Y1:Y{self.ws.max_row}", cols=-21)
+        self.ws.delete_cols(25, 1)
+
+        # Move o PIS
+        self.ws.insert_cols(5)
+        self.ws.move_range(f"Z1:Z{self.ws.max_row}", cols=-21)
+        self.ws.delete_cols(26, 1)
+
+        # Move o Serviço
+        self.ws.insert_cols(6)
+        self.ws.move_range(f"H1:H{self.ws.max_row}", cols=-2)
+        self.ws.delete_cols(8, 1)
+
+        # Move o Cargo
+        self.ws.insert_cols(7)
+        self.ws.move_range(f"I1:I{self.ws.max_row}", cols=-2)
+        self.ws.delete_cols(9, 1)
+
+        # Move a Data de admissão
+        self.ws.insert_cols(10)
+        self.ws.move_range(f"AA1:AA{self.ws.max_row}", cols=-17)
+        self.ws.delete_cols(27, 1)
+
+        # Move o Vencimento das Férias
+        self.ws.insert_cols(11)
+        self.ws.move_range(f"AB1:AB{self.ws.max_row}", cols=-17)
+        self.ws.delete_cols(28, 1)
+
+        # Move a Categoria
+        self.ws.insert_cols(12)
+        self.ws.move_range(f"V1:V{self.ws.max_row}", cols=-10)
+        self.ws.delete_cols(22, 1)
+
+        # Move o salário
+        self.ws.insert_cols(13)
+        self.ws.move_range(f"AC1:AC{self.ws.max_row}", cols=-16)
+        self.ws.delete_cols(29, 1)
+
+
         self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")

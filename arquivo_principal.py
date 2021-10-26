@@ -17,6 +17,7 @@ Planilha().exame_ocupacional()
 Planilha().situacao_funcionario()
 Planilha().dias_exp()
 Planilha().escrevendo_planilha()
+Planilha().ordenando_colunas()
 
 user = getpass.getuser()
 horario = datetime.datetime.now()
