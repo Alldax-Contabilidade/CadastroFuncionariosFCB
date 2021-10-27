@@ -263,3 +263,4 @@ class Planilha:
         self.ws.delete_cols(44, 3)
 
         self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
+        #
