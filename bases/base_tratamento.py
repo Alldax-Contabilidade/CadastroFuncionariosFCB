@@ -282,5 +282,48 @@ class Planilha:
 
         self.ws.delete_cols(49, 2)
 
+        # Move tipo de conta
+        self.ws.insert_cols(27, 1)
+
+        self.ws.move_range(f"AQ1:AQ{self.ws.max_row}", cols=-16)
+
+        self.ws.delete_cols(43, 1)
+
+        # Move o Estado do endereço
+        self.ws.insert_cols(69, 1)
+
+        self.ws.move_range(f"BM1:BM{self.ws.max_row}", cols=4)
+
+        self.ws.delete_cols(65, 1)
+
+        # Move País e Município do Endereço
+        self.ws.insert_cols(68, 2)
+
+        self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=29)
+        self.ws.move_range(f"AL1:AL{self.ws.max_row}", cols=31)
+
+        self.ws.delete_cols(38, 2)
+
+        # Move Páis do Passaporte
+        self.ws.insert_cols(54, 1)
+
+        self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=15)
+
+        self.ws.delete_cols(39, 1)
+
+        # Move dados do Nascimento
+        self.ws.insert_cols(78, 2)
+
+        self.ws.move_range(f"AL1:AL{self.ws.max_row}", cols=40)
+        self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=40)
+
+        self.ws.delete_cols(38, 2)
+
+        # Move emissor do passaporte
+        self.ws.insert_cols(53, 1)
+
+        self.ws.move_range(f"AN1:AN{self.ws.max_row}", cols=13)
+
+        self.ws.delete_cols(40, 1)
 
         self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
