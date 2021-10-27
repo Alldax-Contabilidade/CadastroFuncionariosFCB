@@ -258,30 +258,8 @@ class Planilha:
 
         self.ws.move_range(f"AS1:AS{self.ws.max_row}", cols=-19)
         self.ws.move_range(f"AR1:AR{self.ws.max_row}", cols=-17)
-        self.ws.move_range(f"AT1:AT{self.ws.max_row}", cols=-18)
+        self.ws.move_range(f"AT1:AT{self.ws.max_row}", cols=-17)
 
         self.ws.delete_cols(44, 3)
-
-        # Move dados de Atestado
-        self.ws.insert_cols(29, 6)
-
-        self.ws.move_range(f"CK1:CK{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CL1:CL{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CM1:CM{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CN1:CN{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CO1:CO{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CP1:CP{self.ws.max_row}", cols=-60)
-
-        self.ws.delete_cols(89, 6)
-
-        # Move dados do Plano de Saúde
-        self.ws.insert_cols(35, 2)
-
-        self.ws.move_range(f"AW1:AW{self.ws.max_row}", cols=-14)
-        self.ws.move_range(f"AX1:AX{self.ws.max_row}", cols=-14)
-
-        self.ws.delete_cols(49, 2)
-
-
 
         self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
