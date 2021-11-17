@@ -8,10 +8,7 @@ import getpass
 
 class Planilha:
     consulta = ConsultaFuncionarios()
-
-    # Consulta à tabela i_empregados, retornado a maioria dos dados
     cadastro_funcionario = consulta.cadastro_funcionario()
-
     situacao = consulta.verificando_situacao_funcionario()
     filhos = consulta.consulta_filhos()
     departamentos = consulta.consulta_departamento()
@@ -40,7 +37,7 @@ class Planilha:
 
     user = getpass.getuser()
 
-    # Criação de função para conectar planilhas e modificar números por nomes
+    # criação de função para conectar planilhas e modificar números por nomes
     def trocar_id_nomes(self):
         for cadastro in self.cadastro_funcionario:
             lista_cadastro = list(cadastro)
@@ -329,15 +326,4 @@ class Planilha:
 
         self.ws.delete_cols(40, 1)
 
-        # Move vencimento da CNH
-        self.ws.insert_cols(61, 1)
-
-        self.ws.move_range(f"BL1:BL{self.ws.max_row}", cols=-3)
-
-        self.ws.delete_cols(64, 1)
-
-
-
         self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
-
-# Trabalhando nas alterações solicitadas em 17/11/2021

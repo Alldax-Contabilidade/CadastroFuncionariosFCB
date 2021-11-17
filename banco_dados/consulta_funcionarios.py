@@ -30,11 +30,11 @@ class ConsultaFuncionarios:
 
 # O método fetchall armazena o valor recebido no último execute podendo ser armazendo em uma variável
         info_funcionarios = self.cursor.fetchall()
-        # print(info_funcionarios)
         return info_funcionarios
 
 
 # Função para definir a situação dos funcionários como 'Demitido' ou 'Trabalhando'
+# Se o código do funcionário estiver presente na forescisoes, ele foi demitido
 # Nova busca da foempregados, retornando somente o i_empregados para comparação com a forescisoes
     def verificando_situacao_funcionario(self):
         self.cursor.execute(
@@ -61,8 +61,8 @@ class ConsultaFuncionarios:
             else:
                 self.lista_situacao.append((codigo[0], "Trabalhando"))
 
-# Após a conclusão to if...else, todos os valores terão sido percorridos e estarão com a situação
-# preenchida. Com o consequente retorno da lista_situacao atualizada
+# Após a conclusão do if...else, todos os valores terão sido percorridos e estarão com a situação
+# preenchida. Com o consequente retorno da lista_situacao atualizada que sobrescreverá a variável de classe
         return self.lista_situacao
 
     # Função para consulta do nome dos departamentos
@@ -110,17 +110,14 @@ class ConsultaFuncionarios:
 # Função para consulta de dados do plano de saúde na tabela fooperadoraplanosaude
     def consulta_operadora(self):
         self.cursor.execute(
-            "SELECT I_OPERADORAPLANOSAUDE, NOME FROM externo.bethadba.fooperadoraplanosaude"
-
-        )
+            "SELECT I_OPERADORAPLANOSAUDE, NOME FROM externo.bethadba.fooperadoraplanosaude")
         info_operadora = self.cursor.fetchall()
         return info_operadora
 
 # Função para consulta do nome do cargo
     def consulta_cargos(self):
         self.cursor.execute(
-            "SELECT i_cargos, nome FROM externo.bethadba.focargos WHERE codi_emp = 221"
-        )
+            "SELECT i_cargos, nome FROM externo.bethadba.focargos WHERE codi_emp = 221")
         info_cargos = self.cursor.fetchall()
         return info_cargos
 
@@ -180,3 +177,9 @@ consulta.verificando_situacao_funcionario()
 print(consulta.lista_situacao)
 """
 
+if __name__ == '__main__':
+    consulta = ConsultaFuncionarios()
+    dados = consulta.cadastro_funcionario()
+    pais = consulta.consulta_pais()
+
+    print(pais)

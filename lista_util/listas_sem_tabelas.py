@@ -68,6 +68,7 @@ def lista_util():
         (1, "sim")
     ]
 
+
     return tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, \
            sindicalizado
 
