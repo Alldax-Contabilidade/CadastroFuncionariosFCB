@@ -155,10 +155,10 @@ class Planilha:
         for cadastro in self.lista_geral_cadastro:
             codi_func = cadastro[0]
             if codi_func in self.filhos:
-                self.lista_cadastro.append(self.filhos[1])
-                self.lista_cadastro.append(self.filhos[2])
-                self.lista_cadastro.append(self.filhos[3])
-                self.lista_cadastro.append(self.filhos[4])
+                cadastro.append(self.filhos[1])
+                cadastro.append(self.filhos[2])
+                cadastro.append(self.filhos[3])
+                cadastro.append(self.filhos[4])
 
     def escrevendo_planilha(self):
 

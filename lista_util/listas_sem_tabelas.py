@@ -105,6 +105,6 @@ def cabecalho():
                        "Data Naturalização", "Mãe", "Pai", "Conjugê", "Sexo", "Estado Civil",
                        "Grupo Sanguíneo", "RH Sanguíneo", "Toxicológico Data", "Toxocológico Tipo",
                        "Ex. Ocupacional Tipo", "Ex. Ocupacional Data", "Ex. Ocupacional Resultado",
-                       "Ex. Ocupacional Dt. Vencimento, Nome filho, Nascimento filho, CPF filho, i_filho"]
+                       "Ex. Ocupacional Dt. Vencimento", "Nome filho", "Nascimento filho", "CPF filho", "i_filho"]
 
     return cabecalho_excel
