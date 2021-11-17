@@ -1,5 +1,4 @@
 
-
 def lista_util():
     tipo_horario = [
         (1, "Submetidos a Horário de Trabalho (cap.II da CLT)"),
@@ -67,10 +66,8 @@ def lista_util():
         (0, "não"),
         (1, "sim")
     ]
-
-
     return tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, \
-           sindicalizado
+        sindicalizado
 
 
 def dicionario_ocupacional():
@@ -82,7 +79,7 @@ def dicionario_ocupacional():
         5: "monitoração pontual",
         6: "demissional"
     }
-    resultado= {
+    resultado = {
         1: "apto",
         2: "inapto"
     }
@@ -108,6 +105,6 @@ def cabecalho():
                        "Data Naturalização", "Mãe", "Pai", "Conjugê", "Sexo", "Estado Civil",
                        "Grupo Sanguíneo", "RH Sanguíneo", "Toxicológico Data", "Toxocológico Tipo",
                        "Ex. Ocupacional Tipo", "Ex. Ocupacional Data", "Ex. Ocupacional Resultado",
-                       "Ex. Ocupacional Dt. Vencimento"]
+                       "Ex. Ocupacional Dt. Vencimento, Nome filho, Nascimento filho, CPF filho, i_filho"]
 
     return cabecalho_excel

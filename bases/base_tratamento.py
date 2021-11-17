@@ -8,10 +8,8 @@ import getpass
 
 class Planilha:
     consulta = ConsultaFuncionarios()
-
     # Consulta à tabela i_empregados, retornado a maioria dos dados
     cadastro_funcionario = consulta.cadastro_funcionario()
-
     situacao = consulta.verificando_situacao_funcionario()
     filhos = consulta.consulta_filhos()
     departamentos = consulta.consulta_departamento()
@@ -23,8 +21,8 @@ class Planilha:
     municipio = consulta.consulta_municipio()
     pais = consulta.consulta_pais()
 
-    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, \
-    deficiencia, sindicalizado = lista_util()
+    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, sindicalizado = \
+        lista_util()
 
     wb = openpyxl.Workbook()
     ws = wb.active
@@ -153,6 +151,15 @@ class Planilha:
                 dif_correto = dif + 1
                 cadastro.insert(31, dif_correto)
 
+    def inserindo_filhos(self):
+        for cadastro in self.lista_geral_cadastro:
+            codi_func = cadastro[0]
+            if codi_func in self.filhos:
+                self.lista_cadastro.append(self.filhos[1])
+                self.lista_cadastro.append(self.filhos[2])
+                self.lista_cadastro.append(self.filhos[3])
+                self.lista_cadastro.append(self.filhos[4])
+
     def escrevendo_planilha(self):
 
         titulos_cabecalho = cabecalho()
@@ -171,181 +178,179 @@ class Planilha:
         for linha in self.lista_cadastro:
             self.ws.append(linha)
 
-        # self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
-
-    def ordenando_colunas(self):
-        # Move o banco
-        self.ws.insert_cols(42)
-        self.ws.move_range(f"I1:I{self.ws.max_row}", cols=33)
-        self.ws.delete_cols(9, 1)
-
-        # Move o CPF
-        self.ws.insert_cols(4)
-        self.ws.move_range(f"Y1:Y{self.ws.max_row}", cols=-21)
-        self.ws.delete_cols(25, 1)
-
-        # Move o PIS
-        self.ws.insert_cols(5)
-        self.ws.move_range(f"Z1:Z{self.ws.max_row}", cols=-21)
-        self.ws.delete_cols(26, 1)
-
-        # Move o Serviço
-        self.ws.insert_cols(6)
-        self.ws.move_range(f"H1:H{self.ws.max_row}", cols=-2)
-        self.ws.delete_cols(8, 1)
-
-        # Move o Cargo
-        self.ws.insert_cols(7)
-        self.ws.move_range(f"I1:I{self.ws.max_row}", cols=-2)
-        self.ws.delete_cols(9, 1)
-
-        # Move a Data de admissão
-        self.ws.insert_cols(10)
-        self.ws.move_range(f"AA1:AA{self.ws.max_row}", cols=-17)
-        self.ws.delete_cols(27, 1)
-
-        # Move o Vencimento das Férias
-        self.ws.insert_cols(11)
-        self.ws.move_range(f"AB1:AB{self.ws.max_row}", cols=-17)
-        self.ws.delete_cols(28, 1)
-
-        # Move a Categoria
-        self.ws.insert_cols(12)
-        self.ws.move_range(f"V1:V{self.ws.max_row}", cols=-10)
-        self.ws.delete_cols(22, 1)
-
-        # Move o salário
-        self.ws.insert_cols(13)
-        self.ws.move_range(f"AC1:AC{self.ws.max_row}", cols=-16)
-        self.ws.delete_cols(29, 1)
-
-        # Move dados da Experiência
-        self.ws.insert_cols(14)
-        self.ws.insert_cols(14)
-        self.ws.insert_cols(14)
-        self.ws.insert_cols(14)
-
-        self.ws.move_range(f"AG1:AG{self.ws.max_row}", cols=-19)
-        self.ws.move_range(f"AH1:AH{self.ws.max_row}", cols=-19)
-        self.ws.move_range(f"AI1:AI{self.ws.max_row}", cols=-19)
-        self.ws.move_range(f"AJ1:AJ{self.ws.max_row}", cols=-19)
-
-        self.ws.delete_cols(33, 4)
-
-        # Move dados da CTPS
-        self.ws.insert_cols(18)
-        self.ws.insert_cols(18)
-        self.ws.insert_cols(18)
-        self.ws.insert_cols(18)
-
-        self.ws.move_range(f"AK1:AK{self.ws.max_row}", cols=-19)
-        self.ws.move_range(f"AL1:AL{self.ws.max_row}", cols=-19)
-        self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=-19)
-        self.ws.move_range(f"AN1:AN{self.ws.max_row}", cols=-19)
-
-        self.ws.delete_cols(37, 4)
-
-        # Move dados do Horário
-        self.ws.insert_cols(23)
-        self.ws.insert_cols(23)
-        self.ws.insert_cols(23)
-
-        self.ws.move_range(f"AO1:AO{self.ws.max_row}", cols=-18)
-        self.ws.move_range(f"AP1:AP{self.ws.max_row}", cols=-18)
-        self.ws.move_range(f"AQ1:AQ{self.ws.max_row}", cols=-18)
-
-        self.ws.delete_cols(41, 3)
-
-        # Move dados do Banco
-        self.ws.insert_cols(26, 3)
-
-        self.ws.move_range(f"AS1:AS{self.ws.max_row}", cols=-19)
-        self.ws.move_range(f"AR1:AR{self.ws.max_row}", cols=-17)
-        self.ws.move_range(f"AT1:AT{self.ws.max_row}", cols=-18)
-
-        self.ws.delete_cols(44, 3)
-
-        # Move dados de Atestado
-        self.ws.insert_cols(29, 6)
-
-        self.ws.move_range(f"CK1:CK{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CL1:CL{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CM1:CM{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CN1:CN{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CO1:CO{self.ws.max_row}", cols=-60)
-        self.ws.move_range(f"CP1:CP{self.ws.max_row}", cols=-60)
-
-        self.ws.delete_cols(89, 6)
-
-        # Move dados do Plano de Saúde
-        self.ws.insert_cols(35, 2)
-
-        self.ws.move_range(f"AW1:AW{self.ws.max_row}", cols=-14)
-        self.ws.move_range(f"AX1:AX{self.ws.max_row}", cols=-14)
-
-        self.ws.delete_cols(49, 2)
-
-        # Move tipo de conta
-        self.ws.insert_cols(27, 1)
-
-        self.ws.move_range(f"AQ1:AQ{self.ws.max_row}", cols=-16)
-
-        self.ws.delete_cols(43, 1)
-
-        # Move o Estado do endereço
-        self.ws.insert_cols(69, 1)
-
-        self.ws.move_range(f"BM1:BM{self.ws.max_row}", cols=4)
-
-        self.ws.delete_cols(65, 1)
-
-        # Move País e Município do Endereço
-        self.ws.insert_cols(68, 2)
-
-        self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=29)
-        self.ws.move_range(f"AL1:AL{self.ws.max_row}", cols=31)
-
-        self.ws.delete_cols(38, 2)
-
-        # Move Páis do Passaporte
-        self.ws.insert_cols(54, 1)
-
-        self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=15)
-
-        self.ws.delete_cols(39, 1)
-
-        # Move dados do Nascimento
-        self.ws.insert_cols(78, 2)
-
-        self.ws.move_range(f"AL1:AL{self.ws.max_row}", cols=40)
-        self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=40)
-
-        self.ws.delete_cols(38, 2)
-
-        # Move emissor do passaporte
-        self.ws.insert_cols(53, 1)
-
-        self.ws.move_range(f"AN1:AN{self.ws.max_row}", cols=13)
-
-        self.ws.delete_cols(40, 1)
-
-        # Move vencimento da CNH
-        self.ws.insert_cols(61, 1)
-
-        self.ws.move_range(f"BL1:BL{self.ws.max_row}", cols=-3)
-
-        self.ws.delete_cols(64, 1)
-
-        # Move país e município para depois de bairro
-        self.ws.insert_cols(72, 2)
-
-        self.ws.move_range(f"BL1:BL{self.ws.max_row}", cols=8)
-        self.ws.move_range(f"BM1:BM{self.ws.max_row}", cols=8)
-
-        self.ws.delete_cols(64, 2)
-
-
-
         self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
+
+    # def ordenando_colunas(self):
+    #     # Move o banco
+    #     self.ws.insert_cols(42)
+    #     self.ws.move_range(f"I1:I{self.ws.max_row}", cols=33)
+    #     self.ws.delete_cols(9, 1)
+    #
+    #     # Move o CPF
+    #     self.ws.insert_cols(4)
+    #     self.ws.move_range(f"Y1:Y{self.ws.max_row}", cols=-21)
+    #     self.ws.delete_cols(25, 1)
+    #
+    #     # Move o PIS
+    #     self.ws.insert_cols(5)
+    #     self.ws.move_range(f"Z1:Z{self.ws.max_row}", cols=-21)
+    #     self.ws.delete_cols(26, 1)
+    #
+    #     # Move o Serviço
+    #     self.ws.insert_cols(6)
+    #     self.ws.move_range(f"H1:H{self.ws.max_row}", cols=-2)
+    #     self.ws.delete_cols(8, 1)
+    #
+    #     # Move o Cargo
+    #     self.ws.insert_cols(7)
+    #     self.ws.move_range(f"I1:I{self.ws.max_row}", cols=-2)
+    #     self.ws.delete_cols(9, 1)
+    #
+    #     # Move a Data de admissão
+    #     self.ws.insert_cols(10)
+    #     self.ws.move_range(f"AA1:AA{self.ws.max_row}", cols=-17)
+    #     self.ws.delete_cols(27, 1)
+    #
+    #     # Move o Vencimento das Férias
+    #     self.ws.insert_cols(11)
+    #     self.ws.move_range(f"AB1:AB{self.ws.max_row}", cols=-17)
+    #     self.ws.delete_cols(28, 1)
+    #
+    #     # Move a Categoria
+    #     self.ws.insert_cols(12)
+    #     self.ws.move_range(f"V1:V{self.ws.max_row}", cols=-10)
+    #     self.ws.delete_cols(22, 1)
+    #
+    #     # Move o salário
+    #     self.ws.insert_cols(13)
+    #     self.ws.move_range(f"AC1:AC{self.ws.max_row}", cols=-16)
+    #     self.ws.delete_cols(29, 1)
+    #
+    #     # Move dados da Experiência
+    #     self.ws.insert_cols(14)
+    #     self.ws.insert_cols(14)
+    #     self.ws.insert_cols(14)
+    #     self.ws.insert_cols(14)
+    #
+    #     self.ws.move_range(f"AG1:AG{self.ws.max_row}", cols=-19)
+    #     self.ws.move_range(f"AH1:AH{self.ws.max_row}", cols=-19)
+    #     self.ws.move_range(f"AI1:AI{self.ws.max_row}", cols=-19)
+    #     self.ws.move_range(f"AJ1:AJ{self.ws.max_row}", cols=-19)
+    #
+    #     self.ws.delete_cols(33, 4)
+    #
+    #     # Move dados da CTPS
+    #     self.ws.insert_cols(18)
+    #     self.ws.insert_cols(18)
+    #     self.ws.insert_cols(18)
+    #     self.ws.insert_cols(18)
+    #
+    #     self.ws.move_range(f"AK1:AK{self.ws.max_row}", cols=-19)
+    #     self.ws.move_range(f"AL1:AL{self.ws.max_row}", cols=-19)
+    #     self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=-19)
+    #     self.ws.move_range(f"AN1:AN{self.ws.max_row}", cols=-19)
+    #
+    #     self.ws.delete_cols(37, 4)
+    #
+    #     # Move dados do Horário
+    #     self.ws.insert_cols(23)
+    #     self.ws.insert_cols(23)
+    #     self.ws.insert_cols(23)
+    #
+    #     self.ws.move_range(f"AO1:AO{self.ws.max_row}", cols=-18)
+    #     self.ws.move_range(f"AP1:AP{self.ws.max_row}", cols=-18)
+    #     self.ws.move_range(f"AQ1:AQ{self.ws.max_row}", cols=-18)
+    #
+    #     self.ws.delete_cols(41, 3)
+    #
+    #     # Move dados do Banco
+    #     self.ws.insert_cols(26, 3)
+    #
+    #     self.ws.move_range(f"AS1:AS{self.ws.max_row}", cols=-19)
+    #     self.ws.move_range(f"AR1:AR{self.ws.max_row}", cols=-17)
+    #     self.ws.move_range(f"AT1:AT{self.ws.max_row}", cols=-18)
+    #
+    #     self.ws.delete_cols(44, 3)
+    #
+    #     # Move dados de Atestado
+    #     self.ws.insert_cols(29, 6)
+    #
+    #     self.ws.move_range(f"CK1:CK{self.ws.max_row}", cols=-60)
+    #     self.ws.move_range(f"CL1:CL{self.ws.max_row}", cols=-60)
+    #     self.ws.move_range(f"CM1:CM{self.ws.max_row}", cols=-60)
+    #     self.ws.move_range(f"CN1:CN{self.ws.max_row}", cols=-60)
+    #     self.ws.move_range(f"CO1:CO{self.ws.max_row}", cols=-60)
+    #     self.ws.move_range(f"CP1:CP{self.ws.max_row}", cols=-60)
+    #
+    #     self.ws.delete_cols(89, 6)
+    #
+    #     # Move dados do Plano de Saúde
+    #     self.ws.insert_cols(35, 2)
+    #
+    #     self.ws.move_range(f"AW1:AW{self.ws.max_row}", cols=-14)
+    #     self.ws.move_range(f"AX1:AX{self.ws.max_row}", cols=-14)
+    #
+    #     self.ws.delete_cols(49, 2)
+    #
+    #     # Move tipo de conta
+    #     self.ws.insert_cols(27, 1)
+    #
+    #     self.ws.move_range(f"AQ1:AQ{self.ws.max_row}", cols=-16)
+    #
+    #     self.ws.delete_cols(43, 1)
+    #
+    #     # Move o Estado do endereço
+    #     self.ws.insert_cols(69, 1)
+    #
+    #     self.ws.move_range(f"BM1:BM{self.ws.max_row}", cols=4)
+    #
+    #     self.ws.delete_cols(65, 1)
+    #
+    #     # Move País e Município do Endereço
+    #     self.ws.insert_cols(68, 2)
+    #
+    #     self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=29)
+    #     self.ws.move_range(f"AL1:AL{self.ws.max_row}", cols=31)
+    #
+    #     self.ws.delete_cols(38, 2)
+    #
+    #     # Move Páis do Passaporte
+    #     self.ws.insert_cols(54, 1)
+    #
+    #     self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=15)
+    #
+    #     self.ws.delete_cols(39, 1)
+    #
+    #     # Move dados do Nascimento
+    #     self.ws.insert_cols(78, 2)
+    #
+    #     self.ws.move_range(f"AL1:AL{self.ws.max_row}", cols=40)
+    #     self.ws.move_range(f"AM1:AM{self.ws.max_row}", cols=40)
+    #
+    #     self.ws.delete_cols(38, 2)
+    #
+    #     # Move emissor do passaporte
+    #     self.ws.insert_cols(53, 1)
+    #
+    #     self.ws.move_range(f"AN1:AN{self.ws.max_row}", cols=13)
+    #
+    #     self.ws.delete_cols(40, 1)
+    #
+    #     # Move vencimento da CNH
+    #     self.ws.insert_cols(61, 1)
+    #
+    #     self.ws.move_range(f"BL1:BL{self.ws.max_row}", cols=-3)
+    #
+    #     self.ws.delete_cols(64, 1)
+    #
+    #     # Move país e município para depois de bairro
+    #     self.ws.insert_cols(72, 2)
+    #
+    #     self.ws.move_range(f"BL1:BL{self.ws.max_row}", cols=8)
+    #     self.ws.move_range(f"BM1:BM{self.ws.max_row}", cols=8)
+    #
+    #     self.ws.delete_cols(64, 2)
+    #
+    #     self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
 
 # Trabalhando nas alterações solicitadas em 17/11/2021
