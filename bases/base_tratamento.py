@@ -336,6 +336,14 @@ class Planilha:
 
         self.ws.delete_cols(64, 1)
 
+        # Move país e município para depois de bairro
+        self.ws.insert_cols(72, 2)
+
+        self.ws.move_range(f"BL1:BL{self.ws.max_row}", cols=8)
+        self.ws.move_range(f"BM1:BM{self.ws.max_row}", cols=8)
+
+        self.ws.delete_cols(64, 2)
+
 
 
         self.wb.save(rf"C:\Users\{self.user}\Documents\Funcionarios FCB\Cadastro_Funcionarios.xlsx")
