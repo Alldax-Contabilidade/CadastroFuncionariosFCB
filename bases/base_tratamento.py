@@ -1,14 +1,14 @@
 from banco_dados.consulta_funcionarios import ConsultaFuncionarios
 import openpyxl
 from openpyxl.styles import PatternFill
-from lista_util.listas_sem_tabelas import lista_util, dicionario_ocupacional, cabecalho
+from lista_util.listas_sem_tabelas import lista_util, dicionario_ocupacional, cabecalho, lista
 from openpyxl.styles import Font
 import getpass
 
 
 class Planilha:
     consulta = ConsultaFuncionarios()
-    # Consulta à tabela i_empregados, retornado a maioria dos dados
+
     cadastro_funcionario = consulta.cadastro_funcionario()
     situacao = consulta.verificando_situacao_funcionario()
     filhos = consulta.consulta_filhos()
@@ -21,8 +21,10 @@ class Planilha:
     municipio = consulta.consulta_municipio()
     pais = consulta.consulta_pais()
 
-    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, sindicalizado,\
-        plano_de_saude, forma_pagto = lista_util()
+    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, plano_de_saude, \
+        sindicalizado = lista_util()
+
+    pagamento, estadoCivil = lista()
 
     wb = openpyxl.Workbook()
     ws = wb.active
@@ -30,15 +32,15 @@ class Planilha:
     negrito = Font(bold=True)
     fundo_cor = PatternFill(start_color="0099CCFF", end_color="0099CCFF", fill_type="solid")
 
-    ordem_paramentro = [departamentos, servico, cargos, sindicato, tipo_horario, banco, municipio, pais,
+    ordem_parametro = [departamentos, servico, cargos, sindicato, tipo_horario, banco, municipio, pais,
                         pais, pais, municipio, tipo_conta, cor_raca, grau_instrucao, categoria, emissor,
-                        residencia, deficiencia, sindicalizado, plano_de_saude, forma_pagto]
+                        residencia, deficiencia, plano_de_saude, sindicalizado]
     lista_cadastro = []
     lista_geral_cadastro = []
+    lista = []
 
     user = getpass.getuser()
 
-    # Criação de função para conectar planilhas e modificar números por nomes
     def trocar_id_nomes(self):
         for cadastro in self.cadastro_funcionario:
             lista_cadastro = list(cadastro)
@@ -46,14 +48,11 @@ class Planilha:
             self.lista_geral_cadastro.append(lista_cadastro)
 
         posicao = 2
-        for parametro in self.ordem_paramentro:
+        for parametro in self.ordem_parametro:
             # print(posicao)
             self.troca_nome(parametro, posicao)
             posicao += 1
 
-        # print(self.lista_geral_cadastro[2073])
-
-    # Criação de função para buscar nome baseado no cod
     def troca_nome(self, listagem_parametros, posicao):
         for cadastro in self.lista_geral_cadastro:
 
@@ -62,7 +61,8 @@ class Planilha:
                 if cadastro[posicao] == listagem[0]:
                     cadastro[posicao] = listagem[1]
 
-    # criação de função para conectar planilhas e modificar números por nomes
+                    lista_util()
+
     def plano_saude(self):
 
         for funcionario in self.lista_geral_cadastro:
@@ -84,7 +84,6 @@ class Planilha:
                 funcionario[21] = ''
                 funcionario.insert(22, '')
 
-    # criação de função para conectar planilhas e modificar números por nomes
     def exame_toxicologico(self):
         for cadastro in self.lista_geral_cadastro:
             codi_func = cadastro[0]
@@ -103,10 +102,6 @@ class Planilha:
                     cadastro.append(toxicologico[0][0])
                     cadastro.append('Demissional')
 
-        # print(self.lista_geral_cadastro[2218])
-        # print(self.lista_geral_cadastro[0])
-
-    # criação de função para conectar planilhas e modificar números por nomes
     def exame_ocupacional(self):
         for cadastro in self.lista_geral_cadastro:
             codi_func = cadastro[0]
@@ -126,9 +121,6 @@ class Planilha:
                 cadastro.append(ocupacional[0][1])
                 cadastro.append(result)
                 cadastro.append(ocupacional[0][3])
-        # print(self.lista_geral_cadastro[362])
-
-    # criação de função para definir situação de atividade
 
     def situacao_funcionario(self):
         for cadastro in self.lista_geral_cadastro:
@@ -142,25 +134,14 @@ class Planilha:
 
         for cadastro in self.lista_geral_cadastro:
 
-            if cadastro[30] is None or cadastro[31] is None:
-                cadastro.insert(32, '')
+            if cadastro[29] is None or cadastro[30] is None:
+                cadastro.insert(31, '')
 
             else:
 
-                dif = (cadastro[31] - cadastro[30]).days
+                dif = (cadastro[30] - cadastro[29]).days
                 dif_correto = dif + 1
-                cadastro.insert(32, dif_correto)
-
-    # def inserindo_filhos(self):
-    #     for cadastro in self.lista_geral_cadastro:
-    #         codi_func = cadastro[0]
-    #         # for filhos in self.filhos:
-    #         #     id_empregado = filhos[0]
-    #         #     if codi_func == id_empregado:
-    #         #         # cadastro.insert(self.filhos[1])
-    #         #         # cadastro.insert(self.filhos[2])
-    #         #         cadastro.append(self.filhos[3])
-    #         #         cadastro.append(self.filhos[4])
+                cadastro.insert(31, dif_correto)
 
     def escrevendo_planilha(self):
 

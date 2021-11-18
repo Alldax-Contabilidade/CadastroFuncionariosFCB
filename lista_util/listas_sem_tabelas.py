@@ -51,7 +51,6 @@ def lista_util():
     residencia = [
         (0, "Não"),
         (1, "Sim")
-
     ]
     deficiencia = [
         (0, "Não"),
@@ -65,12 +64,44 @@ def lista_util():
         (0, "Não"),
         (1, "Sim")
     ]
-    forma_pagto = [
-        ('D', "Dinheiro"),
-        ('C', "Crédito em Conta")
+    grau_parentesco = [
+        (1, "conjuguê"),
+        (2, "Filho(a) ou enteado(a) até 21 anos"),
+        (3, "Filho(a) ou enteado(a) universitário(a) ou cursando escola técnica de 2º grau, até 24 anos"),
+        (4, "Filho(a) ou enteado(a) em qualquer idade, quando incapacitado física e/ou mentalmente para o trabalho"),
+        (5, "Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, do qual detenha de guarda judicial, até 21 anos"),
+        (6, "Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, com idade até 24 anos, se ainda estiver cursando "
+            "estabelecimento de nível superior ou escola técnica de 2ºgrau, desde que tenha detido a sua guarda "
+            "judicial até os 21 anos"),
+        (7, "Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, do(a) qual detenha guarda judicial, em qualquer "
+            "idade, quando incapacitado física e/ou mentalmente para o trabalho"),
+        (8, "Pais, avós e bisavós"),
+        (9, "Menor pobre, até 21 anos, que crie e eduque e o qual detenha guarda judicial"),
+        (10, "A pessoa absolutamente incapaz, da qual seja tutor ou curador"),
+        (11, "Companheiro(a) com o(a) qual tenha filho ou viva há mais de 5 anos"),
+        (12, "Ex-cônjugue que receba pensão de alimentos"),
+        (13, "Agredado/Outros")
     ]
     return tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, \
-           sindicalizado, plano_de_saude,  forma_pagto
+        plano_de_saude, sindicalizado, grau_parentesco
+
+
+def lista():
+    pagamento = [
+        ('D', 'Dinheiro'),
+        ('C', 'Crédito em Conta')
+
+    ]
+    estadoCivil = [
+        ('C', 'Casado(a)'),
+        ('D', 'Divorciado(a)'),
+        ('J', 'Separado(a) Judicialmente'),
+        ('O', 'Concubinato(a)'),
+        ('S', 'Solteiro'),
+        ('U', 'União Estável'),
+        ('V', 'Viúvo()a'),
+    ]
+    return pagamento, estadoCivil
 
 
 def dicionario_ocupacional():
@@ -88,19 +119,18 @@ def dicionario_ocupacional():
     }
     return ocupacional, resultado
 
-
 def cabecalho():
     cabecalho_excel = ["Código Funcionario", "Nome Funcionário", "Situação", "Departamento", "Serviço", "Cargo",
                        "Sindicato", "Horário", "Banco", "Município do Endereço", "País do Endereço",
                        "País do Nascimento", "País do Passaporte", "Município do Nascimento",
                        "Tipo de Conta", "Cor", "Grau de Instrução", "Categoria", "Emissor do Passaporte",
-                       "Residente Própria", "Deficiência", "Sindicalizado", "Forma de Pagamento",
-                       "Operadora do Plano de Saúde",
+                       "Residente Própria", "Deficiência", "Optante Plano de Saúde", "Sindicalizado",
+                       "Forma de Pagamento", "Operadora do Plano de Saúde",
                        "Data de adesão", "CPF", "PIS", "Data de Admissão", "Vencimento Férias",
                        "Salário", "Início da Experiência", "Final da Experiência", "Dias de Experiência",
                        "Prorrogação da Experiência", "CTPS", "Nº Série CTPS", "Expedição CTPS",
                        "UF CTPS", "Nº Cartão Ponto", "Horas Mês", "Horas Semana", "Horas Dias",
-                       "Conta", "R.G.", "Orgão Exp. R.G.", "UF R.G.",
+                        "Conta", "R.G.", "Orgão Exp. R.G.", "UF R.G.",
                        "Data Exp. R.G.", "Nº Passaporte", "UF Passaporte", "Emissão Passaporte",
                        "Validade Passaporte", "Nº Título Eleitor", "Zona Eleitoral",
                        "Seção Eleitoral", "CNH", "Cat. CNH", "Orgão Emissor CNH", "Dt. Exp. CNH",
