@@ -16,9 +16,10 @@ class ConsultaFuncionarios:
             "SELECT i_empregados, nome, i_depto, i_servicos, i_cargos,i_sindicatos, TIPO_HORARIO, i_bancos,"
             " MUNICIPIO_ENDERECO, PAIS_ENDERECO, PAIS_NASCIMENTO, PAIS_PASSAPORTE,"
             " MUNICIPIO_NASCIMENTO, TIPO_CONTA, cor, grau_instrucao,categoria, EMISSOR_PASSAPORTE, RESIDENCIA_PROPRIA,"
-            "POSSUI_DEFICIENCIA,OPCAO_PLANO_SAUDE, sindicalizado, cpf, pis,admissao, venc_ferias, salario,"
+            "POSSUI_DEFICIENCIA, sindicalizado, OPCAO_PLANO_SAUDE, forma_pagto, cpf, pis,admissao, venc_ferias, "
+            "salario, "
             " ini_praz_det, fim_praz_det, pro_praz_det, cart_prof,serie_cart_prof, dt_exp_cprof, uf_cart_prof,"
-            " num_cart_ponto, horas_mes, horas_semana,horas_dia, forma_pagto,  conta_corr,"
+            " num_cart_ponto, horas_mes, horas_semana,horas_dia, conta_corr,"
             " identidade, org_exp_ident, uf_exp_ident, dt_exp_ident, NUMERO_PASSAPORTE,UF_PASSAPORTE,"
             " DATA_EMISSAO_PASSAPORTE, DATA_VALIDADE_PASSAPORTE, titulo_eleit, zona_eleit, secao_eleit, cart_motorista,"
             " categ_cart_mot, ORGAO_EMISSOR_CNH, DATA_EXPEDICAO_CNH, estado, cart_reservista,cate_reservista,"
@@ -30,8 +31,8 @@ class ConsultaFuncionarios:
 
 # O método fetchall armazena o valor recebido no último execute podendo ser armazendo em uma variável
         info_funcionarios = self.cursor.fetchall()
-        print(info_funcionarios)
-        # return info_funcionarios
+        # print(info_funcionarios)
+        return info_funcionarios
 
 
 # Função para definir a situação dos funcionários como 'Demitido' ou 'Trabalhando'

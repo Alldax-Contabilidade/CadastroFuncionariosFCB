@@ -21,8 +21,8 @@ class Planilha:
     municipio = consulta.consulta_municipio()
     pais = consulta.consulta_pais()
 
-    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, plano_de_saude, \
-    sindicalizado = lista_util()
+    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, sindicalizado,\
+        plano_de_saude, forma_pagto = lista_util()
 
     wb = openpyxl.Workbook()
     ws = wb.active
@@ -32,7 +32,7 @@ class Planilha:
 
     ordem_paramentro = [departamentos, servico, cargos, sindicato, tipo_horario, banco, municipio, pais,
                         pais, pais, municipio, tipo_conta, cor_raca, grau_instrucao, categoria, emissor,
-                        residencia, deficiencia, plano_de_saude, sindicalizado]
+                        residencia, deficiencia, sindicalizado, plano_de_saude, forma_pagto]
     lista_cadastro = []
     lista_geral_cadastro = []
 
@@ -142,14 +142,14 @@ class Planilha:
 
         for cadastro in self.lista_geral_cadastro:
 
-            if cadastro[29] is None or cadastro[30] is None:
-                cadastro.insert(31, '')
+            if cadastro[30] is None or cadastro[31] is None:
+                cadastro.insert(32, '')
 
             else:
 
-                dif = (cadastro[30] - cadastro[29]).days
+                dif = (cadastro[31] - cadastro[30]).days
                 dif_correto = dif + 1
-                cadastro.insert(31, dif_correto)
+                cadastro.insert(32, dif_correto)
 
     # def inserindo_filhos(self):
     #     for cadastro in self.lista_geral_cadastro:
