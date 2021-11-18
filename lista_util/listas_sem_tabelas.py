@@ -1,4 +1,3 @@
-
 def lista_util():
     tipo_horario = [
         (1, "Submetidos a Horário de Trabalho (cap.II da CLT)"),
@@ -9,79 +8,79 @@ def lista_util():
         (6, "Teletrabalho, previsto no Inciso III do Art.62 da CLT")
     ]
     cor_raca = [
-        (0, "indigena"),
-        (2, "branca"),
-        (4, "negra"),
-        (6, "amarela"),
-        (8, "parda"),
-        (9, "não informada")
+        (0, "Indigena"),
+        (2, "Branca"),
+        (4, "Negra"),
+        (6, "Amarela"),
+        (8, "Parda"),
+        (9, "Não Informada")
     ]
     grau_instrucao = [
-        (1, "analfabeto"),
-        (2, "ensino fundamental até 5º incompleto"),
-        (3, "ensino fundamental até 5º completo"),
-        (4, "ensino fundamental 6º ao 9º"),
-        (5, "ensino fundamental completo"),
-        (6, "ensino medio incompleto"),
-        (7, "ensino medio completo"),
-        (8, "superior incompleto"),
-        (9, "superior completo"),
-        (10, "pós graduação"),
-        (11, "mestrado"),
-        (12, "doutorado"),
+        (1, "Analfabeto"),
+        (2, "Ensino fundamental até 5º incompleto"),
+        (3, "Ensino fundamental até 5º completo"),
+        (4, "Ensino fundamental 6º ao 9º"),
+        (5, "Ensino fundamental completo"),
+        (6, "Ensino medio incompleto"),
+        (7, "Ensino medio completo"),
+        (8, "Superior incompleto"),
+        (9, "Superior completo"),
+        (10, "Pós graduação"),
+        (11, "Mestrado"),
+        (12, "Doutorado"),
         (13, "PHD")
     ]
     tipo_conta = [
-        (1, "não informada"),
-        (2, "conta corrente"),
-        (3, "conta salario"),
-        (4, "conta poupança")
+        (1, "Não Informada"),
+        (2, "Conta Corrente"),
+        (3, "Conta Salário"),
+        (4, "Conta Poupança")
     ]
     categoria = [
-        (1, "mensalista"),
-        (2, "semanalista"),
-        (3, "diarista"),
-        (4, "horista") ,
-        (5, "tarefeiro"),
-        (6, "comissionado")
+        (1, "Mensalista"),
+        (2, "Semanalista"),
+        (3, "Diarista"),
+        (4, "Horista"),
+        (5, "Tarefeiro"),
+        (6, "Comissionado")
     ]
     emissor = [
-        (1, "policia federal"),
-        (2, "orgão emissor estrangeiro")
+        (1, "Policia Federal"),
+        (2, "Orgão Emissor Estrangeiro")
     ]
     residencia = [
-        (0, "não"),
-        (1, "sim")
+        (0, "Não"),
+        (1, "Sim")
 
     ]
     deficiencia = [
-        (0, "não"),
-        (1, "sim")
+        (0, "Não"),
+        (1, "Sim")
     ]
     plano_de_saude = [
-        (0, "não"),
-        (1, "sim")
+        (0, "Não"),
+        (1, "Sim")
     ]
     sindicalizado = [
-        (0, "não"),
-        (1, "sim")
+        (0, "Não"),
+        (1, "Sim")
     ]
     return tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, \
-        sindicalizado
+           plano_de_saude, sindicalizado
 
 
 def dicionario_ocupacional():
     ocupacional = {
-        1: "admissional",
-        2: "periodico",
-        3: "retorno ao trabalho",
-        4: "manuntenção de função",
-        5: "monitoração pontual",
-        6: "demissional"
+        1: "Admissional",
+        2: "Periodico",
+        3: "Retorno ao Trabalho",
+        4: "Manuntenção de Função",
+        5: "Monitoração Pontual",
+        6: "Demissional"
     }
     resultado = {
-        1: "apto",
-        2: "inapto"
+        1: "Apto",
+        2: "Inapto"
     }
     return ocupacional, resultado
 
@@ -90,7 +89,8 @@ def cabecalho():
                        "Sindicato", "Horário", "Banco", "Município do Endereço", "País do Endereço",
                        "País do Nascimento", "País do Passaporte", "Município do Nascimento",
                        "Tipo de Conta", "Cor", "Grau de Instrução", "Categoria", "Emissor do Passaporte",
-                       "Residente Própria", "Deficiência", "Sindicalizado", "Operadora do Plano de Saúde",
+                       "Residente Própria", "Deficiência", "Optante Plano de Saúde", "Sindicalizado",
+                       "Operadora do Plano de Saúde",
                        "Data de adesão", "CPF", "PIS", "Data de Admissão", "Vencimento Férias",
                        "Salário", "Início da Experiência", "Final da Experiência", "Dias de Experiência",
                        "Prorrogação da Experiência", "CTPS", "Nº Série CTPS", "Expedição CTPS",

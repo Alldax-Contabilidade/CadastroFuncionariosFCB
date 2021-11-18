@@ -16,7 +16,7 @@ class ConsultaFuncionarios:
             "SELECT i_empregados, nome, i_depto, i_servicos, i_cargos,i_sindicatos, TIPO_HORARIO, i_bancos,"
             " MUNICIPIO_ENDERECO, PAIS_ENDERECO, PAIS_NASCIMENTO, PAIS_PASSAPORTE,"
             " MUNICIPIO_NASCIMENTO, TIPO_CONTA, cor, grau_instrucao,categoria, EMISSOR_PASSAPORTE, RESIDENCIA_PROPRIA,"
-            "POSSUI_DEFICIENCIA,sindicalizado, OPCAO_PLANO_SAUDE,  cpf, pis,admissao, venc_ferias, salario,"
+            "POSSUI_DEFICIENCIA,OPCAO_PLANO_SAUDE, sindicalizado, cpf, pis,admissao, venc_ferias, salario,"
             " ini_praz_det, fim_praz_det, pro_praz_det, cart_prof,serie_cart_prof, dt_exp_cprof, uf_cart_prof,"
             " num_cart_ponto, horas_mes, horas_semana,horas_dia, forma_pagto,  conta_corr,"
             " identidade, org_exp_ident, uf_exp_ident, dt_exp_ident, NUMERO_PASSAPORTE,UF_PASSAPORTE,"
@@ -30,7 +30,8 @@ class ConsultaFuncionarios:
 
 # O método fetchall armazena o valor recebido no último execute podendo ser armazendo em uma variável
         info_funcionarios = self.cursor.fetchall()
-        return info_funcionarios
+        print(info_funcionarios)
+        # return info_funcionarios
 
 
 # Função para definir a situação dos funcionários como 'Demitido' ou 'Trabalhando'
@@ -105,6 +106,7 @@ class ConsultaFuncionarios:
             f"WHERE codi_emp = 221 AND I_EMPREGADOS = {codigo_funcionario} ORDER BY DATA_INICIO desc"
         )
         info_plano = self.cursor.fetchall()
+        print(info_plano)
         return info_plano
 
 # Função para consulta de dados do plano de saúde na tabela fooperadoraplanosaude
@@ -161,6 +163,18 @@ class ConsultaFuncionarios:
         info_ocupacional = self.cursor.fetchall()
         return info_ocupacional
 
+    def consulta_nome_funcionario(self, i_empregado):
+        # O método execute permite a execução de uma query SQL
+        self.cursor.execute(
+            f"SELECT nome FROM externo.bethadba.foempregados WHERE codi_emp = 221 AND "
+            f"i_empregados = {i_empregado}"
+        )
+        nome_funcionario = self.cursor.fetchone()[0]
+        return nome_funcionario
+
+
+jj = ConsultaFuncionarios
+jj().cadastro_funcionario()
 
 
 """Testes de funcionalidade
@@ -177,9 +191,10 @@ consulta.verificando_situacao_funcionario()
 print(consulta.lista_situacao)
 """
 
-if __name__ == '__main__':
-    consulta = ConsultaFuncionarios()
-    dados = consulta.cadastro_funcionario()
-    pais = consulta.consulta_pais()
-
-    print(pais)
+# if __name__ == '__main__':
+#     consulta = ConsultaFuncionarios()
+#     dados = consulta.cadastro_funcionario()
+#     pais = consulta.consulta_pais()
+#     filho = consulta.consulta_filhos()
+#
+#     print(filho)

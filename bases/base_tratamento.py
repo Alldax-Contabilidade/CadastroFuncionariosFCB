@@ -21,8 +21,8 @@ class Planilha:
     municipio = consulta.consulta_municipio()
     pais = consulta.consulta_pais()
 
-    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, sindicalizado = \
-        lista_util()
+    tipo_horario, cor_raca, grau_instrucao, tipo_conta, categoria, emissor, residencia, deficiencia, plano_de_saude, \
+    sindicalizado = lista_util()
 
     wb = openpyxl.Workbook()
     ws = wb.active
@@ -32,7 +32,7 @@ class Planilha:
 
     ordem_paramentro = [departamentos, servico, cargos, sindicato, tipo_horario, banco, municipio, pais,
                         pais, pais, municipio, tipo_conta, cor_raca, grau_instrucao, categoria, emissor,
-                        residencia, deficiencia, sindicalizado]
+                        residencia, deficiencia, plano_de_saude, sindicalizado]
     lista_cadastro = []
     lista_geral_cadastro = []
 
@@ -151,14 +151,16 @@ class Planilha:
                 dif_correto = dif + 1
                 cadastro.insert(31, dif_correto)
 
-    def inserindo_filhos(self):
-        for cadastro in self.lista_geral_cadastro:
-            codi_func = cadastro[0]
-            if codi_func in self.filhos:
-                cadastro.append(self.filhos[1])
-                cadastro.append(self.filhos[2])
-                cadastro.append(self.filhos[3])
-                cadastro.append(self.filhos[4])
+    # def inserindo_filhos(self):
+    #     for cadastro in self.lista_geral_cadastro:
+    #         codi_func = cadastro[0]
+    #         # for filhos in self.filhos:
+    #         #     id_empregado = filhos[0]
+    #         #     if codi_func == id_empregado:
+    #         #         # cadastro.insert(self.filhos[1])
+    #         #         # cadastro.insert(self.filhos[2])
+    #         #         cadastro.append(self.filhos[3])
+    #         #         cadastro.append(self.filhos[4])
 
     def escrevendo_planilha(self):
 
